@@ -15,7 +15,7 @@ The 2018-2020 rows come from the cross-border inquiry tables in the DPC Annual R
 """
 import csv, datetime as dt, os
 
-ASOF = dt.date(2026, 8, 29)
+ASOF = dt.date(2026, 9, 7)
 
 ROWS = [
  # entity, subject, commenced, precision, source
@@ -24,21 +24,21 @@ ROWS = [
  ('Quantcast International', 'transparency and retention in adtech profiling',
   '2019-05-01', 'month', 'DPC announced inquiry May 2019 (AR2019 table)'),
  ('Verizon Media / Oath (Yahoo)', 'transparency under Articles 12-14',
-  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table'),
+  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table; if this is inquiry IN-18-7-1 (High Court JR of draft dismissed May 2026, [2026] IEHC 323), commencement was 27 Jul 2018 and this bound is conservative'),
  ('Apple Distribution International (ads legal basis)', 'lawful basis for behavioural ads',
-  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table'),
+  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table; if this is inquiry IN-18-7-1 (High Court JR of draft dismissed May 2026, [2026] IEHC 323), commencement was 27 Jul 2018 and this bound is conservative'),
  ('Apple Distribution International (transparency)', 'privacy policy transparency',
-  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table'),
+  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table; if this is inquiry IN-18-7-1 (High Court JR of draft dismissed May 2026, [2026] IEHC 323), commencement was 27 Jul 2018 and this bound is conservative'),
  ('Apple Distribution International (right of access)', 'access request handling',
   '2020-12-31', 'by_year_end', 'listed open in AR2020 cross-border table'),
  ('Facebook Inc. (token breach, US entity)', 'security of processing (Sep 2018 token breach)',
   '2018-12-31', 'by_year_end', 'listed open in AR2019/AR2020 tables; Dec 2024 decisions covered the Irish entity only'),
  ('Meta/Facebook (Hive database access & portability)', 'right of access and data portability',
-  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table'),
+  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table; if this is inquiry IN-18-7-1 (High Court JR of draft dismissed May 2026, [2026] IEHC 323), commencement was 27 Jul 2018 and this bound is conservative'),
  ('Twitter International (access to links)', 'right of access to links accessed on Twitter',
-  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table'),
+  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table; if this is inquiry IN-18-7-1 (High Court JR of draft dismissed May 2026, [2026] IEHC 323), commencement was 27 Jul 2018 and this bound is conservative'),
  ('Twitter International (breach volume)', 'security of processing (breach volume since May 2018)',
-  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table; distinct from decided IN-19-1-1'),
+  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table; if this is inquiry IN-18-7-1 (High Court JR of draft dismissed May 2026, [2026] IEHC 323), commencement was 27 Jul 2018 and this bound is conservative; distinct from decided IN-19-1-1'),
  ('Yelp', 'Articles 5, 6, 7, 17 compliance',
   '2020-12-31', 'by_year_end', 'listed open in AR2020 cross-border table'),
  ('Google Ireland (location data)', 'legal basis and transparency for location data',
@@ -60,7 +60,7 @@ def main():
     with open(out, 'w', newline='') as f:
         w = csv.writer(f)
         w.writerow(['entity','subject','commencement_date','commencement_precision',
-                    'open_years_asof_2026-08-29','status','source'])
+                    f'open_years_asof_{ASOF}','status','source'])
         for e, s, c, p, src in ROWS:
             yrs = round((ASOF - dt.date.fromisoformat(c)).days / 365.25, 2)
             w.writerow([e, s, c, p, yrs, 'no published final decision', src])

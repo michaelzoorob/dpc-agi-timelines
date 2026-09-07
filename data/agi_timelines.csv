@@ -1,15 +1,15 @@
 source,n_forecasters,quantity,value,years_from_2026-08-29,url,notes
-Metaculus community: first general (strong) AI (Q5121),1835,10th percentile arrival date,2027-02-07,0.44,https://www.metaculus.com/questions/5121/,community recency-weighted CDF captured 2026-08-29
-Metaculus community: first general (strong) AI (Q5121),1835,25th percentile arrival date,2029-06-26,2.83,https://www.metaculus.com/questions/5121/,community recency-weighted CDF captured 2026-08-29
-Metaculus community: first general (strong) AI (Q5121),1835,50th percentile arrival date,2033-05-05,6.68,https://www.metaculus.com/questions/5121/,community recency-weighted CDF captured 2026-08-29
-Metaculus community: first general (strong) AI (Q5121),1835,75th percentile arrival date,2041-04-19,14.64,https://www.metaculus.com/questions/5121/,community recency-weighted CDF captured 2026-08-29
-Metaculus community: first general (strong) AI (Q5121),1835,90th percentile arrival date,2057-03-15,30.54,https://www.metaculus.com/questions/5121/,community recency-weighted CDF captured 2026-08-29
-Metaculus community: first weakly general AI (Q3479),1718,10th percentile arrival date,2025-11-18,-0.78,https://www.metaculus.com/questions/3479/,community recency-weighted CDF captured 2026-08-29
-Metaculus community: first weakly general AI (Q3479),1718,25th percentile arrival date,2027-01-31,0.42,https://www.metaculus.com/questions/3479/,community recency-weighted CDF captured 2026-08-29
-Metaculus community: first weakly general AI (Q3479),1718,50th percentile arrival date,2028-10-09,2.11,https://www.metaculus.com/questions/3479/,community recency-weighted CDF captured 2026-08-29
-Metaculus community: first weakly general AI (Q3479),1718,75th percentile arrival date,2032-10-31,6.17,https://www.metaculus.com/questions/3479/,community recency-weighted CDF captured 2026-08-29
-Metaculus community: first weakly general AI (Q3479),1718,90th percentile arrival date,2046-01-13,19.38,https://www.metaculus.com/questions/3479/,community recency-weighted CDF captured 2026-08-29
-AI Impacts 2023 Expert Survey (Grace et al. 2024),1714,10% probability of HLMI by,2027-12-31,1.34,https://arxiv.org/abs/2401.02843,"aggregate over 1,714 AI researchers forecasting High-Level Machine Intelligence; survey fielded Oct 2023"
-AI Impacts 2023 Expert Survey (Grace et al. 2024),1714,50% probability of HLMI by,2047-12-31,21.34,https://arxiv.org/abs/2401.02843,same as above
-XPT superforecasters (Karger et al. 2023),89,"P(AGI exists by 2030, Bostrom affirms)",0.01,4.34,https://forecastingresearch.org/xpt,Existential Risk Persuasion Tournament 2022; 89 superforecasters participated
-XPT AI domain experts (Karger et al. 2023),,"P(AGI exists by 2030, Bostrom affirms)",0.09,4.34,https://forecastingresearch.org/xpt,AI-domain subset of the 80 experts in the tournament
+Metaculus community: first general (strong) AI (Q5121),1837,10th percentile arrival date,2026-12-06,0.25,https://www.metaculus.com/questions/5121/,community recency-weighted CDF captured 2026-08-29
+Metaculus community: first general (strong) AI (Q5121),1837,25th percentile arrival date,2029-02-11,2.43,https://www.metaculus.com/questions/5121/,community recency-weighted CDF captured 2026-08-29
+Metaculus community: first general (strong) AI (Q5121),1837,50th percentile arrival date,2032-10-30,6.15,https://www.metaculus.com/questions/5121/,community recency-weighted CDF captured 2026-08-29
+Metaculus community: first general (strong) AI (Q5121),1837,75th percentile arrival date,2040-06-14,13.77,https://www.metaculus.com/questions/5121/,community recency-weighted CDF captured 2026-08-29
+Metaculus community: first general (strong) AI (Q5121),1837,90th percentile arrival date,2056-08-26,29.97,https://www.metaculus.com/questions/5121/,community recency-weighted CDF captured 2026-08-29
+Metaculus community: first weakly general AI (Q3479),1719,10th percentile arrival date,2025-11-12,-0.82,https://www.metaculus.com/questions/3479/,community recency-weighted CDF captured 2026-08-29
+Metaculus community: first weakly general AI (Q3479),1719,25th percentile arrival date,2026-12-22,0.29,https://www.metaculus.com/questions/3479/,community recency-weighted CDF captured 2026-08-29
+Metaculus community: first weakly general AI (Q3479),1719,50th percentile arrival date,2028-05-23,1.71,https://www.metaculus.com/questions/3479/,community recency-weighted CDF captured 2026-08-29
+Metaculus community: first weakly general AI (Q3479),1719,75th percentile arrival date,2032-03-31,5.56,https://www.metaculus.com/questions/3479/,community recency-weighted CDF captured 2026-08-29
+Metaculus community: first weakly general AI (Q3479),1719,90th percentile arrival date,2044-01-02,17.32,https://www.metaculus.com/questions/3479/,community recency-weighted CDF captured 2026-08-29
+AI Impacts 2023 Expert Survey (Grace et al. 2024),1714,10% probability of HLMI by,2027-12-31,1.31,https://arxiv.org/abs/2401.02843,"aggregate over 1,714 AI researchers forecasting High-Level Machine Intelligence; survey fielded Oct 2023"
+AI Impacts 2023 Expert Survey (Grace et al. 2024),1714,50% probability of HLMI by,2047-12-31,21.31,https://arxiv.org/abs/2401.02843,same as above
+XPT superforecasters (Karger et al. 2023),89,"P(AGI exists by 2030, Bostrom affirms)",0.01,4.31,https://forecastingresearch.org/xpt,Existential Risk Persuasion Tournament 2022; 89 superforecasters participated
+XPT AI domain experts (Karger et al. 2023),,"P(AGI exists by 2030, Bostrom affirms)",0.09,4.31,https://forecastingresearch.org/xpt,AI-domain subset of the 80 experts in the tournament

@@ -18,7 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, '..')
 OUT = os.path.join(ROOT, 'output')
 os.makedirs(OUT, exist_ok=True)
-ASOF = dt.date(2026, 8, 29)
+ASOF = dt.date(2026, 9, 7)
 
 # ---------- palette (dataviz reference palette, light mode, validated) ----------
 BLUE, ORANGE, AQUA = '#2a78d6', '#eb6834', '#1baf7a'
@@ -170,7 +170,7 @@ S['collected_share_of_imposed'] = round(COLLECTED_THROUGH_2025 / S['total_fines_
 # ---------- censoring-aware cohort view (cross-border cases begun by end-2020) ----------
 cohort_events = sorted(r['duration_years'] for r in rows
                        if r['cross_border'] and r['commencement_date'] <= '2020-12-31')
-cohort_censored = sorted(float(r['open_years_asof_2026-08-29']) for r in open_rows
+cohort_censored = sorted(float(r[f'open_years_asof_{ASOF}']) for r in open_rows
                          if r['commencement_date'] <= '2020-12-31')
 combined = sorted(cohort_events + cohort_censored)
 n = len(combined)
@@ -282,7 +282,7 @@ ax.plot(xs, p_weak, color='#f0907c', lw=2, zorder=4, label=f'P(weakly general AI
 ax.plot(xs, p_strong, color='#b02a25', lw=2, zorder=4, label=f'P(strong AGI within X years), Metaculus (n={strong.n:,})')
 
 ax.set_xlim(0, 10); ax.set_ylim(0, 1.0)
-ax.set_xlabel('Years from start of case / years from 29 Aug 2026', fontsize=8.5)
+ax.set_xlabel(f"Years from start of case / years from {ASOF.strftime('%-d %b %Y')}", fontsize=8.5)
 ax.set_ylabel('Share decided / probability arrived', fontsize=8.5)
 ax.yaxis.set_major_formatter(lambda v, _: f'{v:.0%}')
 ax.grid(axis='y'); ax.set_axisbelow(True)
@@ -304,7 +304,7 @@ fig.tight_layout()
 fig.savefig(os.path.join(OUT, 'fig1_race.png'), bbox_inches='tight')
 plt.close(fig)
 
-# ---------- figure 2: if the landmark cases started today ----------
+# ---------- figure 2: the docket in calendar time ----------
 land = [
     ('2018 token breach', 'inquiries-meta-platforms-ireland-limited-token-breach#1'),
     ('Behavioral-ads consent', 'inquiry-linkedin-ireland-unlimited-company-october-2024'),
@@ -315,40 +315,63 @@ land = [
     ('Messaging-app transparency', 'decision-concerning-whatsapp-ireland-ltd'),
     ('Children’s account defaults', 'inquiry-concerning-processing-personal-data-relating-child-users-instagram-social-networking-service'),
 ]
-sel = []
+import matplotlib.dates as mdates
+cal = []
 for label, slug in land:
     r = next(r for r in rows if r['slug'] == slug)
-    sel.append((label, r['duration_years'], r['fine_eur']))
-sel.sort(key=lambda t: t[1])
-
-fig, ax = plt.subplots(figsize=(7.0, 4.3), dpi=300)
-ypos = range(len(sel))
+    cal.append((label, dt.date.fromisoformat(r['commencement_date']), dt.date.fromisoformat(r['decision_date']), r['fine_eur']))
+# still-open inquiries, commencement dates from DPC statements/press releases
+open_cases = [
+    ('Adtech real-time bidding', dt.date(2019, 5, 22)),
+    ('AI training, PaLM 2', dt.date(2024, 9, 12)),
+    ('AI training, Grok', dt.date(2025, 4, 11)),
+]
+kmy = S['km_median_years']
+rows_fig = [(lab, s0, e0, fine, 'decided') for lab, s0, e0, fine in cal] + \
+           [(lab, s0, None, None, 'open') for lab, s0 in open_cases]
+rows_fig.sort(key=lambda t: t[1])
+fig, ax = plt.subplots(figsize=(7.0, 4.5), dpi=300)
 halo = dict(boxstyle='round,pad=0.12', facecolor='white', edgecolor='none', alpha=0.85)
-for i, (label, dur, fine) in enumerate(sel):
-    ax.barh(i, dur, height=0.55, color=BLUE, zorder=3)
-    ftxt = f'€{fine/1e6:,.0f}m' if fine < 1e9 else f'€{fine/1e9:.1f}bn'
-    ax.annotate(f'{dur:.1f}y · {ftxt}', xy=(dur + 0.09, i), va='center', fontsize=8,
-                color=INK2, zorder=5, bbox=halo)
-ax.set_yticks(list(ypos), [t[0] for t in sel], fontsize=8.5)
-ax.set_xlim(0, 10)
-ax.set_ylim(-0.6, 9.0)
-ax.set_xlabel('Duration, formal inquiry to final DPC decision (years)', fontsize=8.5)
+nfig = len(rows_fig)
+for i, (label, s0, e0, fine, kind) in enumerate(rows_fig):
+    y = nfig - 1 - i
+    if kind == 'decided':
+        ax.barh(y, (e0 - s0).days, left=mdates.date2num(s0), height=0.55, color=BLUE, zorder=3)
+        durv = (e0 - s0).days / 365.25
+        ftxt = f'€{fine/1e6:,.0f}m' if fine < 1e9 else f'€{fine/1e9:.1f}bn'
+        ax.annotate(f'{durv:.1f}y · {ftxt}', xy=(mdates.date2num(e0) + 40, y), va='center', fontsize=7.8,
+                    color=INK2, zorder=6, bbox=halo)
+    else:
+        ax.barh(y, (ASOF - s0).days, left=mdates.date2num(s0), height=0.55, color=INK2, zorder=3)
+        proj_end = s0 + dt.timedelta(days=round(kmy * 365.25))
+        if proj_end > ASOF:
+            ax.barh(y, (proj_end - ASOF).days, left=mdates.date2num(ASOF), height=0.55,
+                    color=INK2, alpha=0.26, hatch='///', edgecolor='white', zorder=3)
+            ax.annotate(f"at the {kmy:.1f}y median: {proj_end.strftime('%b %Y')}",
+                        xy=(mdates.date2num(proj_end) + 40, y), va='center', fontsize=7.8,
+                        color=INK2, zorder=6, bbox=halo)
+        else:
+            ax.annotate(f'still open ({(ASOF - s0).days/365.25:.1f}y)',
+                        xy=(mdates.date2num(ASOF) + 40, y), va='center', fontsize=7.8,
+                        color=INK2, zorder=6, bbox=halo)
+ax.set_yticks([nfig - 1 - i for i in range(nfig)], [t[0] for t in rows_fig], fontsize=8.3)
+ax.set_xlim(mdates.date2num(dt.date(2018, 1, 1)), mdates.date2num(dt.date(2036, 1, 1)))
+ax.set_ylim(-0.6, nfig + 1.0)
+ax.xaxis.set_major_locator(mdates.YearLocator(2))
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax.grid(axis='x'); ax.set_axisbelow(True)
-for s in ('top', 'right'): ax.spines[s].set_visible(False)
+for sp in ('top', 'right'): ax.spines[sp].set_visible(False)
 ax.tick_params(labelsize=8)
-
-# AGI quantile markers from today's forecast (strong AGI)
-q25v, q50v = S['strong_q25_years'], S['strong_median_years']
-ax.axvline(q25v, color=ORANGE, lw=1.4, ls=(0, (4, 3)), zorder=2)
-ax.axvline(q50v, color=ORANGE, lw=1.4, zorder=2)
-ax.annotate('25% chance strong AGI\nhas arrived (mid-2029)', xy=(q25v + 0.12, 8.55),
-            fontsize=8, color='#c74e1f', va='top')
-ax.annotate('50% chance\n(May 2033)', xy=(q50v + 0.12, 8.55),
-            fontsize=8, color='#c74e1f', fontweight='bold', va='top')
-sec = ax.secondary_xaxis('top', functions=(lambda x: x, lambda x: x))
-sec.set_xticks([0.34, 2.34, 4.34, 6.34, 8.34], ['2027', '2029', '2031', '2033', '2035'], fontsize=8)
-sec.set_xlabel('Calendar year if the inquiry commenced today (29 Aug 2026)', fontsize=8.5, color=INK2)
-sec.spines['top'].set_color(BASE)
+DARKRED = '#b02a25'
+q25d = ASOF + dt.timedelta(days=round(S['strong_q25_years'] * 365.25))
+q50d = ASOF + dt.timedelta(days=round(S['strong_median_years'] * 365.25))
+for dd, lab, bold, side in ((q25d, f"25% chance strong AGI\nhas arrived ({q25d.strftime('%b %Y')})", False, 'left'),
+                            (q50d, f"50% chance\n({q50d.strftime('%b %Y')})", True, 'right')):
+    ax.axvline(mdates.date2num(dd), color=DARKRED, lw=1.4, ls=(0, (4, 3)), zorder=2)
+    dx = -55 if side == 'left' else 55
+    ax.annotate(lab, xy=(mdates.date2num(dd) + dx, nfig + 0.9), fontsize=8, color=DARKRED, va='top',
+                ha='right' if side == 'left' else 'left',
+                fontweight='bold' if bold else 'normal', bbox=halo, zorder=6)
 fig.tight_layout()
 fig.savefig(os.path.join(OUT, 'fig2_projection.png'), bbox_inches='tight')
 plt.close(fig)
@@ -380,7 +403,7 @@ L.append(f"- Google adtech inquiry open {S['open_google_adtech_years']}y and cou
 L.append(f"- Censoring-aware cohort view: of {S['cohort_n_decided']+S['cohort_n_still_open']} cross-border cases begun by end-2020, {S['cohort_n_still_open']} are still open, so the cohort's median lifetime is at least {S['cohort_median_lifetime_lower_bound']}y and still rising (vs {S['median_bigtech']}y among concluded big-tech cases alone)")
 L.append(f"- Kaplan-Meier estimate for that cohort: median time to decision {S['km_median_years']}y (decided-only median {S['cohort_decided_only_median']}y); {S['km_share_unresolved_at_5y']:.0%} still unresolved at 5y; {S['km_share_unresolved_at_strong_agi_median']:.0%} unresolved past {S['strong_median_years']}y, the strong-AGI median horizon. Censored ages use latest-possible commencement dates, so the true curve sits at or above this estimate")
 L.append(f"- P(weak AGI within the KM median cross-border case, {S['km_median_years']}y): {S['p_weak_within_km_median']:.0%}; P(strong): {S['p_strong_within_km_median']:.0%}")
-L.append("\n## AGI forecasts (Metaculus community, captured 29 Aug 2026)")
+L.append(f"\n## AGI forecasts (Metaculus community, captured {ASOF})")
 L.append(f"- Strong AGI (Q5121, n={S['metaculus_strong_n']:,}): median {S['strong_median_years']}y from now (~May 2033); 25th pct {S['strong_q25_years']}y")
 L.append(f"- Weak AGI (Q3479, n={S['metaculus_weak_n']:,}): median {S['weak_median_years']}y from now (~Oct 2028)")
 L.append("\n## Cross statistics")

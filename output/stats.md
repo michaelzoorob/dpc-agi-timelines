@@ -1,4 +1,4 @@
-# Comparison statistics (as of 2026-08-29)
+# Comparison statistics (as of 2026-09-07)
 
 ## DPC inquiry durations (concluded, published decisions)
 - Concluded decisions in dataset: 67 (59 GDPR, 8 LED/DPA)
@@ -12,21 +12,21 @@
 - Meta EU-US transfers: original complaint (Jun 2013) to decision (May 2023): 9.88y
 - Tullamore hospital ransomware: breach notified Nov 2018, decision Jun 2026: 7.56y
 - Cross-border inquiries opened 2018-2020 with NO published decision by Aug 2026: 13 (of 27 open at end-2020)
-- Google adtech inquiry open 7.27y and counting; Tinder 6.57y
-- Censoring-aware cohort view: of 28 cross-border cases begun by end-2020, 13 are still open, so the cohort's median lifetime is at least 5.87y and still rising (vs 1.96y among concluded big-tech cases alone)
-- Kaplan-Meier estimate for that cohort: median time to decision 6.17y (decided-only median 4.36y); 64% still unresolved at 5y; 45% unresolved past 6.68y, the strong-AGI median horizon. Censored ages use latest-possible commencement dates, so the true curve sits at or above this estimate
-- P(weak AGI within the KM median cross-border case, 6.17y): 75%; P(strong): 47%
+- Google adtech inquiry open 7.3y and counting; Tinder 6.59y
+- Censoring-aware cohort view: of 28 cross-border cases begun by end-2020, 13 are still open, so the cohort's median lifetime is at least 5.88y and still rising (vs 1.96y among concluded big-tech cases alone)
+- Kaplan-Meier estimate for that cohort: median time to decision 6.17y (decided-only median 4.36y); 64% still unresolved at 5y; 53% unresolved past 6.15y, the strong-AGI median horizon. Censored ages use latest-possible commencement dates, so the true curve sits at or above this estimate
+- P(weak AGI within the KM median cross-border case, 6.17y): 77%; P(strong): 50%
 
-## AGI forecasts (Metaculus community, captured 29 Aug 2026)
-- Strong AGI (Q5121, n=1,835): median 6.68y from now (~May 2033); 25th pct 2.83y
-- Weak AGI (Q3479, n=1,718): median 2.11y from now (~Oct 2028)
+## AGI forecasts (Metaculus community, captured 2026-09-07)
+- Strong AGI (Q5121, n=1,837): median 6.15y from now (~May 2033); 25th pct 2.43y
+- Weak AGI (Q3479, n=1,719): median 1.71y from now (~Oct 2028)
 
 ## Cross statistics
-- P(weak AGI arrives within one median DPC inquiry, 1.95y): 48%
-- P(strong AGI within one median DPC inquiry): 19%
-- P(weak AGI within one median EUR-1m+ fine inquiry, 3.99y): 65%
-- P(strong AGI within one median EUR-1m+ fine inquiry): 33%
-- P(strong AGI within the LinkedIn complaint-to-decision span, 6.4y): 48%
-- P(strong AGI within the longest concluded inquiry, 6.67y): 50%  (P weak: 76%)
-- P(strong AGI within the Google adtech inquiry's current age, 7.27y): 53%
-- Share of concluded GDPR inquiries that outlasted 2.83y (the forecasters' 25% strong-AGI horizon): 30% (EUR-1m+ fine subset: 64%)
+- P(weak AGI arrives within one median DPC inquiry, 1.95y): 53%
+- P(strong AGI within one median DPC inquiry): 21%
+- P(weak AGI within one median EUR-1m+ fine inquiry, 3.99y): 68%
+- P(strong AGI within one median EUR-1m+ fine inquiry): 36%
+- P(strong AGI within the LinkedIn complaint-to-decision span, 6.4y): 51%
+- P(strong AGI within the longest concluded inquiry, 6.67y): 53%  (P weak: 78%)
+- P(strong AGI within the Google adtech inquiry's current age, 7.3y): 56%
+- Share of concluded GDPR inquiries that outlasted 2.43y (the forecasters' 25% strong-AGI horizon): 41% (EUR-1m+ fine subset: 79%)

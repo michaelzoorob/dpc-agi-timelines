@@ -2,7 +2,7 @@
 """Build the AGI timeline forecasts dataset.
 
 Primary source: Metaculus community forecasts (recency-weighted CDF), captured
-2026-08-29 from the rendered question pages (data/raw/metaculus_questions.json):
+2026-09-07 from the rendered question pages (data/raw/metaculus_questions.json):
 - Q5121 'When will the first general AI system be devised, tested, and publicly
   announced?' (strong/robust AGI operationalisation: adversarial Turing test, robotic
   assembly, high scores across SAT/Winogrande etc, unified system).
@@ -19,14 +19,14 @@ Benchmark rows from published studies:
 
 Outputs:
 - data/agi_forecast_cdf.csv: year-by-year cumulative probability of AGI arrival for the
-  two Metaculus questions (community forecast as of 2026-08-29).
+  two Metaculus questions (community forecast as of ASOF).
 - data/agi_timelines.csv: tidy table of quantiles/probabilities across all sources.
 """
 import json, csv, math, os, bisect
 import datetime as dt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ASOF = dt.date(2026, 8, 29)
+ASOF = dt.date(2026, 9, 7)
 
 def scale_to_value(x, sc):
     rmin, rmax, zp = sc['range_min'], sc['range_max'], sc.get('zero_point')
@@ -121,14 +121,14 @@ def main():
     rows.append(['AI Impacts 2023 Expert Survey (Grace et al. 2024)', 1714,
                  '50% probability of HLMI by', '2047-12-31', years_from_asof(dt.date(2047,12,31)),
                  'https://arxiv.org/abs/2401.02843', 'same as above'])
-    rows.append(['XPT superforecasters (Karger et al. 2023)', 80,
+    rows.append(['XPT superforecasters (Karger et al. 2023)', 89,
                  'P(AGI exists by 2030, Bostrom affirms)', '0.01', years_from_asof(dt.date(2030,12,31)),
                  'https://forecastingresearch.org/xpt',
-                 'Existential Risk Persuasion Tournament 2022; 80 superforecasters participated'])
+                 'Existential Risk Persuasion Tournament 2022; 89 superforecasters participated'])
     rows.append(['XPT AI domain experts (Karger et al. 2023)', '',
                  'P(AGI exists by 2030, Bostrom affirms)', '0.09', years_from_asof(dt.date(2030,12,31)),
                  'https://forecastingresearch.org/xpt',
-                 'AI-domain subset of the 89 experts in the tournament'])
+                 'AI-domain subset of the 80 experts in the tournament'])
     out = os.path.join(HERE, '..', 'data', 'agi_timelines.csv')
     with open(out, 'w', newline='') as f:
         w = csv.writer(f)
