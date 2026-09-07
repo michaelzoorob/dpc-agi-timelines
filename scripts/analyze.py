@@ -304,7 +304,7 @@ fig.tight_layout()
 fig.savefig(os.path.join(OUT, 'fig1_race.png'), bbox_inches='tight')
 plt.close(fig)
 
-# ---------- figure 2: the docket in calendar time ----------
+# ---------- figure 2: durations vs the AGI horizons ----------
 land = [
     ('2018 token breach', 'inquiries-meta-platforms-ireland-limited-token-breach#1'),
     ('Behavioral-ads consent', 'inquiry-linkedin-ireland-unlimited-company-october-2024'),
@@ -315,63 +315,50 @@ land = [
     ('Messaging-app transparency', 'decision-concerning-whatsapp-ireland-ltd'),
     ('Children’s account defaults', 'inquiry-concerning-processing-personal-data-relating-child-users-instagram-social-networking-service'),
 ]
-import matplotlib.dates as mdates
-cal = []
+sel = []
 for label, slug in land:
     r = next(r for r in rows if r['slug'] == slug)
-    cal.append((label, dt.date.fromisoformat(r['commencement_date']), dt.date.fromisoformat(r['decision_date']), r['fine_eur']))
-# still-open inquiries, commencement dates from DPC statements/press releases
-open_cases = [
-    ('Adtech real-time bidding', dt.date(2019, 5, 22)),
-    ('AI training, PaLM 2', dt.date(2024, 9, 12)),
-    ('AI training, Grok', dt.date(2025, 4, 11)),
+    sel.append((label, r['duration_years'], r['fine_eur'], 'decided'))
+open_now = [
+    ('Adtech real-time bidding', (ASOF - dt.date(2019, 5, 22)).days / 365.25),
+    ('AI training, PaLM 2', (ASOF - dt.date(2024, 9, 12)).days / 365.25),
+    ('AI training, Grok', (ASOF - dt.date(2025, 4, 11)).days / 365.25),
 ]
-kmy = S['km_median_years']
-rows_fig = [(lab, s0, e0, fine, 'decided') for lab, s0, e0, fine in cal] + \
-           [(lab, s0, None, None, 'open') for lab, s0 in open_cases]
-rows_fig.sort(key=lambda t: t[1])
-fig, ax = plt.subplots(figsize=(7.0, 4.5), dpi=300)
+sel += [(lab, d, None, 'open') for lab, d in open_now]
+sel.sort(key=lambda t: t[1])
+
+fig, ax = plt.subplots(figsize=(7.0, 4.45), dpi=300)
 halo = dict(boxstyle='round,pad=0.12', facecolor='white', edgecolor='none', alpha=0.85)
-nfig = len(rows_fig)
-for i, (label, s0, e0, fine, kind) in enumerate(rows_fig):
-    y = nfig - 1 - i
+for i, (label, dur, fine, kind) in enumerate(sel):
     if kind == 'decided':
-        ax.barh(y, (e0 - s0).days, left=mdates.date2num(s0), height=0.55, color=BLUE, zorder=3)
-        durv = (e0 - s0).days / 365.25
+        ax.barh(i, dur, height=0.55, color=BLUE, zorder=3)
         ftxt = f'€{fine/1e6:,.0f}m' if fine < 1e9 else f'€{fine/1e9:.1f}bn'
-        ax.annotate(f'{durv:.1f}y · {ftxt}', xy=(mdates.date2num(e0) + 40, y), va='center', fontsize=7.8,
+        ax.annotate(f'{dur:.1f}y · {ftxt}', xy=(dur + 0.09, i), va='center', fontsize=8,
                     color=INK2, zorder=6, bbox=halo)
     else:
-        ax.barh(y, (ASOF - s0).days, left=mdates.date2num(s0), height=0.55, color=INK2, zorder=3)
-        proj_end = s0 + dt.timedelta(days=round(kmy * 365.25))
-        if proj_end > ASOF:
-            ax.barh(y, (proj_end - ASOF).days, left=mdates.date2num(ASOF), height=0.55,
-                    color=INK2, alpha=0.26, hatch='///', edgecolor='white', zorder=3)
-            ax.annotate(f"at the {kmy:.1f}y median: {proj_end.strftime('%b %Y')}",
-                        xy=(mdates.date2num(proj_end) + 40, y), va='center', fontsize=7.8,
-                        color=INK2, zorder=6, bbox=halo)
-        else:
-            ax.annotate(f'still open ({(ASOF - s0).days/365.25:.1f}y)',
-                        xy=(mdates.date2num(ASOF) + 40, y), va='center', fontsize=7.8,
-                        color=INK2, zorder=6, bbox=halo)
-ax.set_yticks([nfig - 1 - i for i in range(nfig)], [t[0] for t in rows_fig], fontsize=8.3)
-ax.set_xlim(mdates.date2num(dt.date(2018, 1, 1)), mdates.date2num(dt.date(2036, 1, 1)))
-ax.set_ylim(-0.6, nfig + 1.0)
-ax.xaxis.set_major_locator(mdates.YearLocator(2))
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
+        ax.barh(i, dur, height=0.55, color=INK2, zorder=3)
+        ax.barh(i, 0.55, left=dur, height=0.55, color=INK2, alpha=0.26, hatch='///',
+                edgecolor='white', zorder=3)
+        ax.annotate(f'still open ({dur:.1f}y)', xy=(dur + 0.68, i), va='center', fontsize=8,
+                    color=INK2, zorder=6, bbox=halo)
+ax.set_yticks(range(len(sel)), [t[0] for t in sel], fontsize=8.3)
+ax.set_xlim(0, 10)
+ax.set_ylim(-0.6, len(sel) + 1.1)
+ax.set_xlabel('Duration, formal inquiry to final DPC decision (years); open inquiries shown to date', fontsize=8.5)
 ax.grid(axis='x'); ax.set_axisbelow(True)
 for sp in ('top', 'right'): ax.spines[sp].set_visible(False)
 ax.tick_params(labelsize=8)
+
+q25v, q50v = S['strong_q25_years'], S['strong_median_years']
 DARKRED = '#b02a25'
-q25d = ASOF + dt.timedelta(days=round(S['strong_q25_years'] * 365.25))
-q50d = ASOF + dt.timedelta(days=round(S['strong_median_years'] * 365.25))
-for dd, lab, bold, side in ((q25d, f"25% chance strong AGI\nhas arrived ({q25d.strftime('%b %Y')})", False, 'left'),
-                            (q50d, f"50% chance\n({q50d.strftime('%b %Y')})", True, 'right')):
-    ax.axvline(mdates.date2num(dd), color=DARKRED, lw=1.4, ls=(0, (4, 3)), zorder=2)
-    dx = -55 if side == 'left' else 55
-    ax.annotate(lab, xy=(mdates.date2num(dd) + dx, nfig + 0.9), fontsize=8, color=DARKRED, va='top',
-                ha='right' if side == 'left' else 'left',
-                fontweight='bold' if bold else 'normal', bbox=halo, zorder=6)
+ax.axvline(q25v, color=DARKRED, lw=1.4, ls=(0, (4, 3)), zorder=2)
+ax.axvline(q50v, color=DARKRED, lw=1.4, zorder=2)
+q25lab = (ASOF + dt.timedelta(days=round(q25v * 365.25))).strftime('%b %Y')
+q50lab = (ASOF + dt.timedelta(days=round(q50v * 365.25))).strftime('%b %Y')
+ax.annotate(f'25% chance strong AGI\nhas arrived ({q25lab})', xy=(q25v - 0.12, len(sel) + 1.0),
+            fontsize=8, color=DARKRED, va='top', ha='right', bbox=halo, zorder=6)
+ax.annotate(f'50% chance\n({q50lab})', xy=(q50v + 0.12, len(sel) + 1.0),
+            fontsize=8, color=DARKRED, fontweight='bold', va='top', bbox=halo, zorder=6)
 fig.tight_layout()
 fig.savefig(os.path.join(OUT, 'fig2_projection.png'), bbox_inches='tight')
 plt.close(fig)
