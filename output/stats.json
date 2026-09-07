@@ -19,7 +19,7 @@
   4.6,
   4.6,
   4.64,
-  6.41
+  6.4
  ],
  "tullamore_breach_to_decision": 7.56,
  "meta_transfers_complaint_to_decision": 9.88,
@@ -42,8 +42,8 @@
  "strong_q25_years": 2.83,
  "share_inquiries_longer_than_strong_q25": 0.305,
  "share_fined1m_longer_than_strong_q25": 0.643,
- "collected_through_2025_eur": 19962000,
- "collected_share_of_imposed": 0.0049,
+ "collected_through_2025_eur": 20037000,
+ "collected_share_of_imposed": 0.005,
  "cohort_n_decided": 15,
  "cohort_n_still_open": 13,
  "cohort_median_lifetime_lower_bound": 5.87,

@@ -36,12 +36,15 @@ scripts below.
   Commencement Letter date stated in the decision) to the DPC's final decision adoption
   date. This excludes pre-inquiry complaint handling (captured in `trigger_date` where
   known) and excludes post-decision appeals, so it understates end-to-end enforcement time.
-- 11 rows have month precision (day set to the 15th, or to the documented program start
+- 20 rows have month precision (day set to the 15th, or to the documented program start
   for the June 2018 CCTV sweep). `commencement_precision` flags them.
 - Eight decisions under the Law Enforcement Directive / Data Protection Act Part 5 are
   flagged `LED` and excluded from headline GDPR statistics.
-- The DPC publishes every decision made under the 2018 Act; absence from the register is
-  the basis for the "no published final decision" status of open inquiries.
+- The dataset covers final decisions published on the DPC's register. The register is
+  not exhaustive: AR2025 lists a handful of 2025 complaint-handling decisions
+  (reprimands and dismissals) that were never posted to it, so the register is treated
+  as the universe of published decisions, and "no published final decision" is the
+  criterion for counting an inquiry as open.
 - Fine figures are amounts IMPOSED. Fines become payable only after Circuit Court
   confirmation (s.143 DPA 2018) or the end of appeals; per the DPC's own annual reports,
   roughly EUR 19.96m of the EUR 4.04bn imposed had been collected by end-2025

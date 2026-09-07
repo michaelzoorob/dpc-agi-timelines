@@ -102,8 +102,8 @@ dur_all = sorted(r['duration_years'] for r in gdpr)
 dur_bt = sorted(r['duration_years'] for r in bigtech)
 dur_f1m = sorted(r['duration_years'] for r in fined1m)
 
-noyb = [r for r in gdpr if r['trigger_date'] == '2018-05-25']
-noyb_spans = [(dt.date.fromisoformat(r['decision_date']) - dt.date(2018, 5, 25)).days / 365.25 for r in noyb]
+noyb = [r for r in gdpr if r['trigger_date'] in ('2018-05-25', '2018-05-28')]
+noyb_spans = [(dt.date.fromisoformat(r['decision_date']) - dt.date.fromisoformat(r['trigger_date'])).days / 365.25 for r in noyb]
 
 tull = next(r for r in gdpr if 'Tullamore' in r['entity'])
 tull_breach_span = (dt.date.fromisoformat(tull['decision_date']) - dt.date.fromisoformat(tull['trigger_date'])).days / 365.25
@@ -163,7 +163,7 @@ S['share_fined1m_longer_than_strong_q25'] = round(sum(1 for d in dur_f1m if d > 
 #   AR2024: Dept of Health 22,500 (the rest of the 2024 in-year figure is the
 #           Centric+VIEC portion of the Nov 2023 batch)
 #   AR2025: CDETB 125,000
-COLLECTED_THROUGH_2025 = 800_000 + 17_639_500 + 1_375_000 + 22_500 + 125_000
+COLLECTED_THROUGH_2025 = 75_000 + 800_000 + 17_639_500 + 1_375_000 + 22_500 + 125_000  # Tusla EUR 75k confirmed Nov 2020 and paid per AR2020; 2024 counts only the Dept of Health EUR 22.5k newly collected (AR2024's EUR 582.5k total overlaps AR2023 confirmations)
 S['collected_through_2025_eur'] = COLLECTED_THROUGH_2025
 S['collected_share_of_imposed'] = round(COLLECTED_THROUGH_2025 / S['total_fines_eur'], 4)
 
@@ -265,7 +265,7 @@ plt.close(fig)
 json.dump(S, open(os.path.join(OUT, 'stats.json'), 'w'), indent=1)
 
 # ---------- figure 1: the race (KM incidence vs AGI forecast CDFs) ----------
-fig, ax = plt.subplots(figsize=(7.0, 3.9), dpi=300)
+fig, ax = plt.subplots(figsize=(7.0, 3.45), dpi=300)
 xs = [i / 20 for i in range(0, 201)]  # 0..10 years
 p_strong = [strong.p_by_years(x) for x in xs]
 p_weak = [weak.p_by_years(x) for x in xs]
@@ -278,14 +278,8 @@ max_censor = max(cohort_censor_times)
 ax.step(inc_x + [last_event_t], inc_y + [last_inc], where='post', color=BLUE, lw=2, zorder=5,
         label='Cross-border cases decided within X years, 2018-2020 cohort (Kaplan-Meier, n=28)')
 ax.plot([last_event_t, max_censor], [last_inc, last_inc], color=BLUE, lw=2, ls=(0, (3, 3)), zorder=5)
-# finished-only ECDF for the same cohort (context: the flattering version)
-ev = sorted(cohort_event_times)
-gx = [0] + ev + [10]
-gy = [0] + [(i + 1) / len(ev) for i in range(len(ev))] + [1.0]
-ax.step(gx, gy, where='post', color=MUTED, lw=1.3, zorder=3,
-        label='Same curve ignoring the 13 still-open cases (n=15)')
-ax.plot(xs, p_weak, color=AQUA, lw=2, zorder=4, label=f'P(weakly general AI within X years), Metaculus (n={weak.n:,})')
-ax.plot(xs, p_strong, color=ORANGE, lw=2, zorder=4, label=f'P(strong AGI within X years), Metaculus (n={strong.n:,})')
+ax.plot(xs, p_weak, color='#f0907c', lw=2, zorder=4, label=f'P(weakly general AI within X years), Metaculus (n={weak.n:,})')
+ax.plot(xs, p_strong, color='#b02a25', lw=2, zorder=4, label=f'P(strong AGI within X years), Metaculus (n={strong.n:,})')
 
 ax.set_xlim(0, 10); ax.set_ylim(0, 1.0)
 ax.set_xlabel('Years from start of case / years from 29 Aug 2026', fontsize=8.5)
@@ -297,9 +291,8 @@ ax.tick_params(labelsize=8)
 
 ax.annotate('cross-border cases decided (KM)', xy=(0.2, 0.028), color=BLUE, fontsize=8.5, fontweight='bold',
             bbox=dict(boxstyle='round,pad=0.15', facecolor='white', edgecolor='none', alpha=0.85), zorder=7)
-ax.annotate('finished cases only', xy=(6.32, 0.93), color=MUTED, fontsize=8)
-ax.annotate('weakly general AI\narrived (forecast)', xy=(1.75, 0.64), color='#0f7a54', fontsize=8.5, fontweight='bold')
-ax.annotate('strong AGI\narrived (forecast)', xy=(8.15, 0.44), color='#c74e1f', fontsize=8.5, fontweight='bold')
+ax.annotate('weakly general AI\narrived (forecast)', xy=(1.75, 0.64), color='#cf6350', fontsize=8.5, fontweight='bold')
+ax.annotate('strong AGI\narrived (forecast)', xy=(8.15, 0.44), color='#b02a25', fontsize=8.5, fontweight='bold')
 ax.plot([S['km_median_years']], [0.5], marker='o', ms=6, color=BLUE, zorder=6)
 ax.annotate(f"median: {S['km_median_years']:.1f}y", xy=(S['km_median_years'] - 0.05, 0.5),
             xytext=(4.55, 0.53), fontsize=8, color=INK2,
@@ -379,7 +372,7 @@ L.append(f"- GDPR inquiries: median {S['median_gdpr_years']}y, mean {S['mean_gdp
 L.append(f"- Big-tech (cross-border platform) inquiries: n={S['n_bigtech']}, median {S['median_bigtech']}y")
 L.append(f"- Inquiries ending in a fine >= EUR 1m: n={S['n_fined1m']}, median {S['median_fined1m']}y, mean {S['mean_fined1m']}y")
 L.append(f"- Share of GDPR inquiries taking > 3y: {S['share_over_3y']:.0%}; > 5y: {S['share_over_5y']:.0%}")
-L.append(f"- GDPR-day-one complaints (25 May 2018) to final decision: {S['noyb_spans']} years (Facebook, Instagram, WhatsApp, LinkedIn)")
+L.append(f"- GDPR-launch-window complaints (25-28 May 2018) to final decision: {S['noyb_spans']} years (Facebook, Instagram, WhatsApp, LinkedIn)")
 L.append(f"- Meta EU-US transfers: original complaint (Jun 2013) to decision (May 2023): {S['meta_transfers_complaint_to_decision']}y")
 L.append(f"- Tullamore hospital ransomware: breach notified Nov 2018, decision Jun 2026: {S['tullamore_breach_to_decision']}y")
 L.append(f"- Cross-border inquiries opened 2018-2020 with NO published decision by Aug 2026: {S['n_open_pre2021_no_decision']} (of 27 open at end-2020)")
