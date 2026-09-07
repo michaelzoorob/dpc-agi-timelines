@@ -1,0 +1,19 @@
+.DS_Store
+.playwright-mcp/
+
+# large fetched binaries (regenerable via scripts/fetch_pdfs.py or dataprotection.ie)
+data/raw/pdfs/
+data/raw/annual_reports/*.pdf
+data/raw/fetch_pdfs.log
+
+# the write-up and its drafting files stay out of this repo
+output/report.html
+output/report.pdf
+output/artifact.html
+output/draft_for_edit.md
+output/final_extracted.md
+output/counsel_*.md
+output/edit_*.md
+output/register_review.md
+output/pangram_*
+scripts/check_style.py

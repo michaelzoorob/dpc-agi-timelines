@@ -1,0 +1,49 @@
+CORRIGENDUM
+DPC Inquiry Reference: IN-19-7-3
+Corrigendum to the Decision of the Data Protection Commission, made on 18 June 2025 pursuant
+to Section 111 of the Data Protection Act 2018 concerning City of Dublin Education and Training
+Board.
+1. The decision records a third party investigation having been carried out on 13 and 14 October
+2018. Following the making of the decision, the data controller submitted that this investigation
+was in fact carried out between 16 and 19 October 2018. To reflect this clarification, the decision
+should be read as follows:
+On page 6, in paragraph 21(a):
+For:
+‘which conducted an investigation of the SUSI website between 13 and 14 October 2018.’
+Read:
+‘which conducted an investigation of the SUSI website on the SUSI website between 16 and
+19 October 2018.’
+On page 13, in paragraph 54:
+For:
+‘discovered between 14 and 16 October 2018’
+Read:
+‘discovered on 16 October 2018’
+On page 13, in paragraph 55, first bullet point:
+For:
+‘discovered between 14 and 16 October 2018.’
+Read:
+‘discovered on 16 October 2018.’
+On page 14, in paragraph 55, second bullet point:
+For:
+‘discovered between 14 and 16 October 2018.’
+Read:
+‘discovered on 16 October 2018.’
+
+On page 35, in paragraph 145:
+For:
+‘CDETB stated that it became aware between 14 and 16 October 2018’
+Read:
+‘CDETB stated that it became aware on 16 October 2018’
+2. On page 68, in paragraph 283, the decision refers to a number of technical and organisational
+measures implemented by the data controller in order to reduce the likelihood of similar
+breaches occurring in future.
+The fifth bullet point at paragraph 283 states:
+‘The Grant Application System now has its own portal and is separate to the website.’
+In respect of that statement, the data controller has since submitted as follows:
+‘The Grant Application System has always operated through its own dedicated portal and
+has been functionally and technically separate from the main website since its inception.
+This separation was in place from the beginning, rather than being a recent change.’
+
+__________________________
+
+
