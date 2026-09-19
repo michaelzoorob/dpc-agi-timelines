@@ -266,7 +266,7 @@ plt.close(fig)
 json.dump(S, open(os.path.join(OUT, 'stats.json'), 'w'), indent=1)
 
 # ---------- figure 1: the race (KM incidence vs AGI forecast CDFs) ----------
-fig, ax = plt.subplots(figsize=(7.0, 3.45), dpi=300)
+fig, ax = plt.subplots(figsize=(7.0, 3.3), dpi=300)
 xs = [i / 20 for i in range(0, 201)]  # 0..10 years
 p_strong = [strong.p_by_years(x) for x in xs]
 p_weak = [weak.p_by_years(x) for x in xs]
