@@ -39,6 +39,7 @@
  "p_strong_within_linkedin_span": 0.514,
  "p_weak_within_linkedin_span": 0.776,
  "p_strong_within_google_adtech_open": 0.558,
+ "p_weak_within_google_adtech_open": 0.799,
  "strong_q25_years": 2.43,
  "share_inquiries_longer_than_strong_q25": 0.407,
  "share_fined1m_longer_than_strong_q25": 0.786,

@@ -144,6 +144,7 @@ S['p_weak_within_max_inquiry'] = round(weak.p_by_years(S['max_duration']), 3)
 S['p_strong_within_linkedin_span'] = round(strong.p_by_years(max(noyb_spans)), 3)
 S['p_weak_within_linkedin_span'] = round(weak.p_by_years(max(noyb_spans)), 3)
 S['p_strong_within_google_adtech_open'] = round(strong.p_by_years(S['open_google_adtech_years']), 3)
+S['p_weak_within_google_adtech_open'] = round(weak.p_by_years(S['open_google_adtech_years']), 3)
 # share of inquiries that would outlast AGI-quantiles
 q25s = strong.quantile_years(0.25)
 S['strong_q25_years'] = round(q25s, 2)
