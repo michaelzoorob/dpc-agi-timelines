@@ -16,4 +16,6 @@ output/counsel_*.md
 output/edit_*.md
 output/register_review.md
 output/pangram_*
+output/gdoc.html
+output/gdoc_*
 scripts/check_style.py
