@@ -242,7 +242,11 @@ ax.step(xs_n, ys_n, where='post', color=MUTED, lw=1.6, zorder=3,
 
 ax.axhline(0.5, color=GRID, lw=0.8, zorder=1)
 ax.axvline(S['strong_median_years'], color=ORANGE, lw=1.4, zorder=2)
-ax.annotate('50% chance strong AGI\nhas arrived (May 2033)', xy=(S['strong_median_years'] + 0.08, 0.965),
+def _date_label(years):
+    return (dt.datetime(ASOF.year, ASOF.month, ASOF.day) + dt.timedelta(days=years * 365.25)).strftime('%b %Y')
+strong_median_label = _date_label(strong.quantile_years(0.5))
+weak_median_label = _date_label(weak.quantile_years(0.5))
+ax.annotate(f'50% chance strong AGI\nhas arrived ({strong_median_label})', xy=(S['strong_median_years'] + 0.08, 0.965),
             fontsize=8, color='#c74e1f', fontweight='bold', va='top')
 ax.plot([km_median], [0.5], marker='o', ms=6, color=BLUE, zorder=6)
 ax.annotate(f'median: {km_median:.1f}y', xy=(km_median, 0.5), xytext=(4.35, 0.585),
@@ -386,14 +390,14 @@ L.append(f"- Share of GDPR inquiries taking > 3y: {S['share_over_3y']:.0%}; > 5y
 L.append(f"- GDPR-launch-window complaints (25-28 May 2018) to final decision: {S['noyb_spans']} years (Facebook, Instagram, WhatsApp, LinkedIn)")
 L.append(f"- Meta EU-US transfers: original complaint (Jun 2013) to decision (May 2023): {S['meta_transfers_complaint_to_decision']}y")
 L.append(f"- Tullamore hospital ransomware: breach notified Nov 2018, decision Jun 2026: {S['tullamore_breach_to_decision']}y")
-L.append(f"- Cross-border inquiries opened 2018-2020 with NO published decision by Aug 2026: {S['n_open_pre2021_no_decision']} (of 27 open at end-2020)")
+L.append(f"- Cross-border inquiries opened 2018-2020 with NO published decision by {ASOF.strftime("%b %Y")}: {S['n_open_pre2021_no_decision']} (of 27 open at end-2020)")
 L.append(f"- Google adtech inquiry open {S['open_google_adtech_years']}y and counting; Tinder {S['open_tinder_years']}y")
 L.append(f"- Censoring-aware cohort view: of {S['cohort_n_decided']+S['cohort_n_still_open']} cross-border cases begun by end-2020, {S['cohort_n_still_open']} are still open, so the cohort's median lifetime is at least {S['cohort_median_lifetime_lower_bound']}y and still rising (vs {S['median_bigtech']}y among concluded big-tech cases alone)")
 L.append(f"- Kaplan-Meier estimate for that cohort: median time to decision {S['km_median_years']}y (decided-only median {S['cohort_decided_only_median']}y); {S['km_share_unresolved_at_5y']:.0%} still unresolved at 5y; {S['km_share_unresolved_at_strong_agi_median']:.0%} unresolved past {S['strong_median_years']}y, the strong-AGI median horizon. Censored ages use latest-possible commencement dates, so the true curve sits at or above this estimate")
 L.append(f"- P(weak AGI within the KM median cross-border case, {S['km_median_years']}y): {S['p_weak_within_km_median']:.0%}; P(strong): {S['p_strong_within_km_median']:.0%}")
 L.append(f"\n## AGI forecasts (Metaculus community, captured {ASOF})")
-L.append(f"- Strong AGI (Q5121, n={S['metaculus_strong_n']:,}): median {S['strong_median_years']}y from now (~May 2033); 25th pct {S['strong_q25_years']}y")
-L.append(f"- Weak AGI (Q3479, n={S['metaculus_weak_n']:,}): median {S['weak_median_years']}y from now (~Oct 2028)")
+L.append(f"- Strong AGI (Q5121, n={S['metaculus_strong_n']:,}): median {S['strong_median_years']}y from now (~{strong_median_label}); 25th pct {S['strong_q25_years']}y")
+L.append(f"- Weak AGI (Q3479, n={S['metaculus_weak_n']:,}): median {S['weak_median_years']}y from now (~{weak_median_label})")
 L.append("\n## Cross statistics")
 L.append(f"- P(weak AGI arrives within one median DPC inquiry, {S['median_gdpr_years']}y): {S['p_weak_within_median_inquiry']:.0%}")
 L.append(f"- P(strong AGI within one median DPC inquiry): {S['p_strong_within_median_inquiry']:.0%}")

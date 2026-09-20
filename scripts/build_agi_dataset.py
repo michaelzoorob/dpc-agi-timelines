@@ -113,7 +113,7 @@ def main():
             rows.append([name, m.n, f'{int(p*100)}th percentile arrival date',
                          d.isoformat() if d else 'beyond range',
                          years_from_asof(d) if d else '', url,
-                         'community recency-weighted CDF captured 2026-08-29'])
+                         f'community recency-weighted CDF captured {ASOF.isoformat()}'])
     rows.append(['AI Impacts 2023 Expert Survey (Grace et al. 2024)', 1714,
                  '10% probability of HLMI by', '2027-12-31', years_from_asof(dt.date(2027,12,31)),
                  'https://arxiv.org/abs/2401.02843',
@@ -132,7 +132,7 @@ def main():
     out = os.path.join(HERE, '..', 'data', 'agi_timelines.csv')
     with open(out, 'w', newline='') as f:
         w = csv.writer(f)
-        w.writerow(['source','n_forecasters','quantity','value','years_from_2026-08-29','url','notes'])
+        w.writerow(['source','n_forecasters','quantity','value',f'years_from_{ASOF.isoformat()}','url','notes'])
         w.writerows(rows)
     print("wrote", out)
 

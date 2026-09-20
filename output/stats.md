@@ -11,15 +11,15 @@
 - GDPR-launch-window complaints (25-28 May 2018) to final decision: [4.6, 4.6, 4.64, 6.4] years (Facebook, Instagram, WhatsApp, LinkedIn)
 - Meta EU-US transfers: original complaint (Jun 2013) to decision (May 2023): 9.88y
 - Tullamore hospital ransomware: breach notified Nov 2018, decision Jun 2026: 7.56y
-- Cross-border inquiries opened 2018-2020 with NO published decision by Aug 2026: 13 (of 27 open at end-2020)
+- Cross-border inquiries opened 2018-2020 with NO published decision by Sep 2026: 13 (of 27 open at end-2020)
 - Google adtech inquiry open 7.3y and counting; Tinder 6.59y
 - Censoring-aware cohort view: of 28 cross-border cases begun by end-2020, 13 are still open, so the cohort's median lifetime is at least 5.88y and still rising (vs 1.96y among concluded big-tech cases alone)
 - Kaplan-Meier estimate for that cohort: median time to decision 6.17y (decided-only median 4.36y); 64% still unresolved at 5y; 53% unresolved past 6.15y, the strong-AGI median horizon. Censored ages use latest-possible commencement dates, so the true curve sits at or above this estimate
 - P(weak AGI within the KM median cross-border case, 6.17y): 77%; P(strong): 50%
 
 ## AGI forecasts (Metaculus community, captured 2026-09-07)
-- Strong AGI (Q5121, n=1,837): median 6.15y from now (~May 2033); 25th pct 2.43y
-- Weak AGI (Q3479, n=1,719): median 1.71y from now (~Oct 2028)
+- Strong AGI (Q5121, n=1,837): median 6.15y from now (~Oct 2032); 25th pct 2.43y
+- Weak AGI (Q3479, n=1,719): median 1.71y from now (~May 2028)
 
 ## Cross statistics
 - P(weak AGI arrives within one median DPC inquiry, 1.95y): 53%

@@ -3,7 +3,8 @@
 How long do Irish Data Protection Commission (DPC) GDPR investigations take, and how does
 that distribution compare with the distribution of AGI timeline forecasts?
 
-Built 29 August 2026. All statistics are reproducible from the two datasets and the
+Built 29 August 2026; datasets, forecasts, and statistics refreshed 7 September 2026 (every
+"as of" figure uses that date). All statistics are reproducible from the datasets and the
 scripts below.
 
 ## Datasets
@@ -11,8 +12,9 @@ scripts below.
 | File | What it is |
 |---|---|
 | `data/dpc_inquiries.csv` | 67 concluded DPC statutory inquiries / complaint decisions published under the Data Protection Act 2018 (Aug 2019 to Jun 2026). One row per inquiry with commencement date, decision date, duration, fine, sector, origin, legal regime, and a per-row source note. |
-| `data/dpc_open_inquiries.csv` | 17 notable cross-border inquiries with no published final decision as of 29 Aug 2026, with commencement dates and duration-so-far. |
-| `data/agi_timelines.csv` | AGI arrival forecasts. Metaculus community quantiles (Q5121 general AI, Q3479 weakly general AI, captured 29 Aug 2026), AI Impacts 2023 survey aggregates, XPT tournament probabilities. |
+| `data/dpc_open_inquiries.csv` | 17 notable cross-border inquiries with no published final decision as of 7 Sep 2026, with commencement dates and duration-so-far. |
+| `data/dpc_cases_combined.csv` | Spreadsheet-style table of all 84 cases (67 concluded + 17 open) on one common column set, for people who just want the case list. Built by `scripts/build_combined_csv.py`; open rows carry their age as of 7 Sep 2026. |
+| `data/agi_timelines.csv` | AGI arrival forecasts. Metaculus community quantiles (Q5121 general AI, Q3479 weakly general AI, captured 7 Sep 2026; the 29 Aug 2026 capture is kept in `data/raw/metaculus_questions_2026-08-29.json`), AI Impacts 2023 survey aggregates, XPT tournament probabilities. |
 | `data/agi_forecast_cdf.csv` | Year-by-year cumulative probability of AGI arrival from the two Metaculus community CDFs. |
 
 ## Scripts (run in this order)
@@ -25,7 +27,9 @@ scripts below.
 3. `scripts/build_open_inquiries.py` writes `data/dpc_open_inquiries.csv`.
 4. `scripts/build_agi_dataset.py` converts the captured Metaculus CDFs into quantiles and
    the year-by-year table, and adds the survey benchmark rows.
-5. `scripts/analyze.py` computes all comparison statistics (`output/stats.md`,
+5. `scripts/build_combined_csv.py` merges the concluded and open tables into
+   `data/dpc_cases_combined.csv`.
+6. `scripts/analyze.py` computes all comparison statistics (`output/stats.md`,
    `output/stats.json`), including the Kaplan-Meier survival estimate for the
    2018-2020 cross-border cohort, and renders the three figures
    (`fig1_race.png`, `fig2_projection.png`, `fig3_survival.png`).
@@ -47,11 +51,11 @@ scripts below.
   criterion for counting an inquiry as open.
 - Fine figures are amounts IMPOSED. Fines become payable only after Circuit Court
   confirmation (s.143 DPA 2018) or the end of appeals; per the DPC's own annual reports,
-  roughly EUR 19.96m of the EUR 4.04bn imposed had been collected by end-2025
+  roughly EUR 20.04m of the EUR 4.04bn imposed had been collected by end-2025
   (breakdown documented in scripts/analyze.py).
 - Concluded-only duration statistics are right-censored and understate true durations.
   Headline statistics therefore center the Kaplan-Meier estimate: of 28 cross-border cases
-  begun by end-2020, 13 remained open in Aug 2026 (censored), giving a median time to
+  begun by end-2020, 13 remained open in Sep 2026 (censored), giving a median time to
   decision of 6.17 years versus 4.36 years from finished cases alone (see stats.md).
   Censored ages use latest-possible start dates, so the estimate is conservative.
 - Metaculus CDFs are the recency-weighted community aggregate embedded in the question
@@ -63,7 +67,7 @@ scripts below.
 - DPC decisions register: https://www.dataprotection.ie/en/dpc-guidance/decisions
 - DPC annual reports 2018 to 2025 (inquiry counts, cross-border inquiry tables),
   downloadable from dataprotection.ie; PDFs are not committed (see .gitignore)
-- Metaculus Q5121, Q3479 (community forecasts, 1,835 and 1,718 forecasters)
+- Metaculus Q5121, Q3479 (community forecasts, 1,837 and 1,719 forecasters at the 7 Sep 2026 capture)
 - Grace et al. 2024, "Thousands of AI Authors on the Future of AI", arXiv:2401.02843
 - Karger et al. 2023, Existential Risk Persuasion Tournament, Forecasting Research Institute
 - ICCL enforcement tracking (Google adtech inquiry status)
@@ -72,5 +76,7 @@ scripts below.
 
 - `output/stats.md` (all headline numbers), `output/stats.json` (machine-readable),
   `output/table_flagship.csv` (landmark cross-border cases)
-- `output/fig1_race.png` (KM incidence vs AGI forecast CDFs), `output/fig2_projection.png`
-  (landmark cases replayed from today), `output/fig3_survival.png` (survival curve)
+- `output/fig2_projection.png` (decided and still-open cross-border cases as duration bars
+  against the strong-AGI 25% and 50% horizons; Figure 1 in the write-up),
+  `output/fig1_race.png` (Kaplan-Meier incidence vs the AGI forecast CDFs; Figure 2 in the
+  write-up), `output/fig3_survival.png` (survival-curve view, repo only)

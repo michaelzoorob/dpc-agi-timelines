@@ -19,3 +19,6 @@ output/pangram_*
 output/gdoc.html
 output/gdoc_*
 scripts/check_style.py
+output/us_eu_research.html
+output/unpublished_list.html
+data/raw/metaculus_*_rendered.html

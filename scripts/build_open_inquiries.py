@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Curated inventory of notable DPC cross-border statutory inquiries that were open
-(no published final decision) as of 2026-08-29.
+(no published final decision) as of the ASOF date set below.
 
 Membership test: the DPC's published decisions register (data/dpc_inquiries.csv covers
 every decision published under the Data Protection Act 2018 through June 2026) contains
