@@ -34,7 +34,7 @@ ROWS = [
  ('Facebook Inc. (token breach, US entity)', 'security of processing (Sep 2018 token breach)',
   '2018-12-31', 'by_year_end', 'listed open in AR2019/AR2020 tables; Dec 2024 decisions covered the Irish entity only'),
  ('Meta/Facebook (Hive database access & portability)', 'right of access and data portability',
-  '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table; if this is inquiry IN-18-7-1 (High Court JR of draft dismissed May 2026, [2026] IEHC 323), commencement was 27 Jul 2018 and this bound is conservative'),
+  '2018-07-27', 'day', 'inquiry IN-18-7-1 opened 27 Jul 2018 on a 20 Jul 2018 complaint about access to the Hive data warehouse; confirmed by High Court judgment [2026] IEHC 323 (21 May 2026) and contemporaneous reporting (Law Society Gazette, ppc.land); previously bounded at end-2019 from the AR2019 open-inquiries table'),
  ('Twitter International (access to links)', 'right of access to links accessed on Twitter',
   '2019-12-31', 'by_year_end', 'listed open in AR2019 cross-border table; if this is inquiry IN-18-7-1 (High Court JR of draft dismissed May 2026, [2026] IEHC 323), commencement was 27 Jul 2018 and this bound is conservative'),
  ('Twitter International (breach volume)', 'security of processing (breach volume since May 2018)',
