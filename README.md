@@ -12,8 +12,8 @@ scripts below.
 | File | What it is |
 |---|---|
 | `data/dpc_inquiries.csv` | 67 concluded DPC statutory inquiries / complaint decisions published under the Data Protection Act 2018 (Aug 2019 to Jun 2026). One row per inquiry with commencement date, decision date, duration, fine, sector, origin, legal regime, and a per-row source note. |
-| `data/dpc_open_inquiries.csv` | 17 notable cross-border inquiries with no published final decision as of 7 Sep 2026, with commencement dates and duration-so-far. |
-| `data/dpc_cases_combined.csv` | Spreadsheet-style table of all 84 cases (67 concluded + 17 open) on one common column set, for people who just want the case list. Built by `scripts/build_combined_csv.py`; open rows carry their age as of 7 Sep 2026. |
+| `data/dpc_open_inquiries.csv` | 21 notable cross-border inquiries with no published final decision as of 7 Sep 2026 (the Google location-data inquiry among them was decided on 21 Sep 2026, after the basis date; see its source note), with commencement dates and duration-so-far. |
+| `data/dpc_cases_combined.csv` | Spreadsheet-style table of all 88 cases (67 concluded + 21 open) on one common column set, for people who just want the case list. Built by `scripts/build_combined_csv.py`; open rows carry their age as of 7 Sep 2026. |
 | `data/agi_timelines.csv` | AGI arrival forecasts. Metaculus community quantiles (Q5121 general AI, Q3479 weakly general AI, captured 7 Sep 2026; the 29 Aug 2026 capture is kept in `data/raw/metaculus_questions_2026-08-29.json`), AI Impacts 2023 survey aggregates, XPT tournament probabilities. |
 | `data/agi_forecast_cdf.csv` | Year-by-year cumulative probability of AGI arrival from the two Metaculus community CDFs. |
 

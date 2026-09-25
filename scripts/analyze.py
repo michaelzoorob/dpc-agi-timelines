@@ -169,9 +169,9 @@ S['collected_through_2025_eur'] = COLLECTED_THROUGH_2025
 S['collected_share_of_imposed'] = round(COLLECTED_THROUGH_2025 / S['total_fines_eur'], 4)
 
 # ---------- censoring-aware cohort view (cross-border cases begun by end-2020) ----------
-cohort_events = sorted(r['duration_years'] for r in rows
+cohort_events = sorted(int(r['duration_days']) / 365.25 for r in rows
                        if r['cross_border'] and r['commencement_date'] <= '2020-12-31')
-cohort_censored = sorted(float(r[f'open_years_asof_{ASOF}']) for r in open_rows
+cohort_censored = sorted((ASOF - dt.date.fromisoformat(r['commencement_date'])).days / 365.25 for r in open_rows
                          if r['commencement_date'] <= '2020-12-31')
 combined = sorted(cohort_events + cohort_censored)
 n = len(combined)
@@ -217,7 +217,7 @@ def km_S(t):
         else: break
     return s
 S['km_median_years'] = round(km_median, 2)
-S['km_share_unresolved_at_strong_agi_median'] = round(km_S(S['strong_median_years']), 3)
+S['km_share_unresolved_at_strong_agi_median'] = round(km_S(strong.quantile_years(0.5)), 3)
 S['km_share_unresolved_at_5y'] = round(km_S(5.0), 3)
 naive_median = st.median(cohort_event_times)
 S['cohort_decided_only_median'] = round(naive_median, 2)
@@ -229,7 +229,7 @@ fig, ax = plt.subplots(figsize=(7.0, 4.0), dpi=300)
 xs3 = [t for t, s in km_steps] + [8.0]
 ys3 = [s for t, s in km_steps] + [km_steps[-1][1]]
 ax.step(xs3, ys3, where='post', color=BLUE, lw=2, zorder=4,
-        label='Kaplan-Meier: still-open cases counted as censored (n=28)')
+        label=f'Kaplan-Meier: still-open cases counted as censored (n={len(cohort_event_times)+len(cohort_censor_times)})')
 # censor ticks on the curve
 for ct in cohort_censor_times:
     ax.plot([ct], [km_S(ct)], marker='|', ms=9, mew=1.6, color=BLUE, zorder=5)
@@ -281,7 +281,7 @@ inc_y = [1 - s for t, s in km_steps]
 last_event_t, last_inc = inc_x[-1], inc_y[-1]
 max_censor = max(cohort_censor_times)
 ax.step(inc_x + [last_event_t], inc_y + [last_inc], where='post', color=BLUE, lw=2, zorder=5,
-        label='Cross-border cases decided within X years, 2018-2020 cohort (Kaplan-Meier, n=28)')
+        label=f'Cross-border cases decided within X years, 2018-2020 cohort (Kaplan-Meier, n={len(cohort_event_times)+len(cohort_censor_times)})')
 ax.plot([last_event_t, max_censor], [last_inc, last_inc], color=BLUE, lw=2, ls=(0, (3, 3)), zorder=5)
 ax.plot(xs, p_weak, color='#f0907c', lw=2, zorder=4, label=f'P(weakly general AI within X years), Metaculus (n={weak.n:,})')
 ax.plot(xs, p_strong, color='#b02a25', lw=2, zorder=4, label=f'P(strong AGI within X years), Metaculus (n={strong.n:,})')
@@ -302,7 +302,7 @@ ax.plot([S['km_median_years']], [0.5], marker='o', ms=6, color=BLUE, zorder=6)
 ax.annotate(f"median: {S['km_median_years']:.1f}y", xy=(S['km_median_years'] - 0.05, 0.5),
             xytext=(4.55, 0.53), fontsize=8, color=INK2,
             arrowprops=dict(arrowstyle='-', color=MUTED, lw=0.8))
-ax.annotate('45% of the cohort still open\nwhen observation ends', xy=(6.55, 0.645),
+ax.annotate(f'{km_steps[-1][1]:.0%} of the cohort still open\nwhen observation ends', xy=(6.55, 0.645),
             fontsize=8, color=BLUE)
 ax.legend(loc='lower right', fontsize=6.6, frameon=False)
 fig.tight_layout()
@@ -311,7 +311,7 @@ plt.close(fig)
 
 # ---------- figure 2: durations vs the AGI horizons ----------
 land = [
-    ('2018 token breach', 'inquiries-meta-platforms-ireland-limited-token-breach#1'),
+    ('2018 token breach', 'inquiries-meta-platforms-ireland-limited-token-breach#2'),
     ('Behavioral-ads consent', 'inquiry-linkedin-ireland-unlimited-company-october-2024'),
     ('Plaintext passwords', 'inquiry-meta-platforms-ireland-limited-september-2024'),
     ('Forced-consent advertising', 'inquiry-meta-platforms-ireland-limited-december-2022#1'),

@@ -51,19 +51,19 @@ row('inquiry-tusla-child-and-family-agency-may-2020', 'IN-19-12-8', 'Tusla Child
     trigger='2019-11-04', trigger_type='breach notified',
     note='Commencement letter 11 Dec 2019 quoted in decision')
 row('inquiry-university-college-dublin', 'IN-19-7-4', 'University College Dublin', PB, 0,
-    'own-volition (breach)', 'GDPR', '2019-07-19', 'day', '2020-06-17', 70000, 0,
+    'own-volition (breach)', 'GDPR', '2019-07-19', 'day', '2020-12-17', 70000, 0,
     trigger='2018-08-08', trigger_type='first of 7 breaches notified',
-    note='Notice of Commencement 19 July 2019 per decision')
+    note="Notice of Commencement 19 July 2019 per decision; decision dated 17 December 2020 on the PDF cover and in the DPC decisions list (the individual web page's '17 June 2020' is a DPC typo)")
 row('inquiry-tusla-child-and-family-agency-august-2020', 'IN-18-11-4', 'Tusla Child and Family Agency (3)', PB, 0,
-    'own-volition (breach)', 'GDPR', '2018-12-15', 'month', '2020-08-12', 85000, 0,
-    note='71 breaches; decision quotes Tusla doc "DPC Inquiry initiated in December 2018"; fines 50k+35k')
+    'own-volition (breach)', 'GDPR', '2018-12-06', 'day', '2020-08-12', 85000, 0,
+    note='71 breaches; decision quotes Tusla doc "DPC Inquiry initiated in December 2018"; fines 50k+35k; notice of commencement letter dated 6 December 2018 (para 2.1)')
 row('inquiries-concerning-health-service-executive#1', 'IN-19-9-1', 'Health Service Executive (1)', PB, 0,
     'own-volition (breach)', 'GDPR', '2019-10-17', 'day', '2020-08-18', 65000, 0,
     note='Notice of Commencement 17 Oct 2019 per decision')
 row('inquiries-concerning-health-service-executive#2', 'IN-19-9-2', 'Health Service Executive (2)', PB, 0,
-    'own-volition (breach)', 'GDPR', '2019-11-15', 'month', '2020-09-29', 0, 0,
+    'own-volition (breach)', 'GDPR', '2019-11-26', 'day', '2020-09-29', 0, 0,
     trigger='2019-05-01', trigger_type='breach notified',
-    note='Second HSE inquiry; commencement month approximated (notice date not in available text); no additional fine given IN-19-9-1')
+    note='Second HSE inquiry; commencement month approximated (notice date not in available text); no additional fine given IN-19-9-1; Notice of Commencement 26 November 2019 (para 3.3)')
 row('inquiry-waterford-city-and-county-council', '06-SIU-2018', 'Waterford City & County Council (CCTV)', PB, 0,
     'own-volition', 'LED', '2018-06-25', 'month', '2020-10-21', 0, 0,
     note='SIU surveillance program June 2018')
@@ -103,20 +103,20 @@ row('inquiry-limerick-city-and-county-council', '03-SIU-2018', 'Limerick City & 
     note='Decision records audit opening phase commencing 25 June 2018')
 # ---------------------------------------------------------------- 2022
 row('inquiry-personal-injuries-assessment-board', 'IN-20-4-7', 'Personal Injuries Assessment Board', PB, 0,
-    'own-volition (breach)', 'GDPR', '2020-04-15', 'month', '2022-01-24', 0, 0,
+    'own-volition (breach)', 'GDPR', '2020-05-08', 'month', '2022-01-24', 0, 0,
     trigger='2019-12-10', trigger_type='breach notified',
-    note='Commencement month from DPC ref convention (IN-20-4)')
+    note='Commencement inferred as May 2020: the published decision gives no date, and the twin inquiry into the same lost USB device (IN-20-4-8) was commenced by letter of 8 May 2020; the DPC ref convention had suggested April')
 row('inquiry-consultancy-provider', 'IN-20-4-8', 'A Consultancy Provider (processor)', PR, 0,
-    'own-volition (breach)', 'GDPR', '2020-04-15', 'month', '2022-01-24', 0, 0,
-    note='Companion inquiry to PIAB; commencement month from DPC ref convention')
+    'own-volition (breach)', 'GDPR', '2020-05-08', 'day', '2022-01-24', 0, 0,
+    note='Companion inquiry to PIAB; commencement month from DPC ref convention; Letter of Notice of the Commencement of an Inquiry 8 May 2020 (para 4.6)')
 row('inquiry-slane-credit-union', 'IN-19-7-5', 'Slane Credit Union', PR, 0,
     'own-volition (breach)', 'GDPR', '2019-07-19', 'day', '2022-01-26', 5000, 0,
     trigger='2018-11-30', trigger_type='breach notified',
     note='Inquiry Commencement Notice 19 Jul 2019 per decision')
 row('inquiry-bank-ireland-group-plc', 'IN-19-9-5', 'Bank of Ireland Group (CCR breaches)', PR, 0,
-    'own-volition (breach)', 'GDPR', '2019-09-15', 'month', '2022-03-14', 463000, 0,
+    'own-volition (breach)', 'GDPR', '2019-11-12', 'month', '2022-03-14', 463000, 0,
     trigger='2018-11-09', trigger_type='first of 22 breaches notified',
-    note='Commencement month from DPC ref convention (IN-19-9)')
+    note="Commencement letter undated in the decision text, but the appendix schedule records BOI's acknowledgement of the inquiry on 12 November 2019 and its reply to the commencement letter on 6 December 2019, so the inquiry commenced on or shortly before 12 Nov 2019 (the DPC ref convention had suggested September)")
 row('inquiry-concerning-12-facebook-personal-data-breaches', 'IN-18-11-5', 'Meta/Facebook (12 breaches 2018)', BT, 1,
     'own-volition (breach)', 'GDPR', '2018-12-11', 'day', '2022-03-15', 17000000, 0,
     trigger='2018-06-07', trigger_type='first of 12 breaches notified',
@@ -143,25 +143,25 @@ row('inquiry-ark-life-assurance-company-dac', 'IN-21-6-1', 'Ark Life Assurance (
 row('inquiry-concerning-meta-dataset-november-2022', 'IN-21-4-2', 'Meta/Facebook (data scraping)', BT, 1,
     'own-volition', 'GDPR', '2021-04-14', 'day', '2022-11-25', 265000000, 0,
     note='Commenced 14 Apr 2021 per decision after media reports of 533m-user scraped dataset')
-row('inquiry-garda-siochana-december-2022', 'IN-20-1-3', 'An Garda Siochana (disclosure requests)', PB, 0,
+row('inquiry-garda-siochana-december-2022', 'IN-20-1-3', 'An Garda Siochana (Kilmainham station breach)', PB, 0,
     'own-volition (breach)', 'LED', '2020-01-15', 'month', '2022-12-15', 0, 0,
-    note='Commencement month from DPC ref convention (IN-20-1); LED/DPA Part 5')
+    note="No decision text published; DPC page: LED (Part 5) inquiry into a breach at Kilmainham Garda Station that disclosed 108 people's names and addresses, decided 15 Dec 2022; commencement month from DPC ref convention (IN-20-1)")
 row('inquiry-virtue-integrated-elder-care-ltd-viec-december-2022', 'IN-21-2-5', 'Virtue Integrated Elder Care', PR, 0,
-    'own-volition (breach)', 'GDPR', '2021-02-15', 'month', '2022-12-20', 100000, 0,
+    'own-volition (breach)', 'GDPR', '2021-03-08', 'day', '2022-12-20', 100000, 0,
     trigger='2020-08-19', trigger_type='breach notified',
-    note='Commencement month from DPC ref convention (IN-21-2)')
+    note='Commencement month from DPC ref convention (IN-21-2); Commencement Letter 8 March 2021 (appendix C.1)')
 row('inquiry-ag-couriers-limited-ta-fastway-couriers-ireland-december-2022', 'IN-21-6-2', 'Fastway Couriers (A&G Couriers)', PR, 0,
-    'own-volition (breach)', 'GDPR', '2021-06-15', 'month', '2022-12-30', 15000, 0,
+    'own-volition (breach)', 'GDPR', '2021-10-18', 'day', '2022-12-30', 15000, 0,
     trigger='2021-03-04', trigger_type='breach notified',
-    note='Commencement month from DPC ref convention (IN-21-6)')
+    note='Commencement month from DPC ref convention (IN-21-6); Inquiry Commencement Letter 18 October 2021 per decision, four months after the reference month')
 row('inquiry-meta-platforms-ireland-limited-december-2022#1', 'IN-18-5-5', 'Meta/Facebook (legal basis for ads)', BT, 1,
     'complaint', 'GDPR', '2018-08-20', 'day', '2022-12-31', 210000000, 1,
     trigger='2018-05-25', trigger_type='noyb complaint (GDPR day one)',
     note='Inquiry commenced 20 Aug 2018 per decision; EDPB Art 65 binding decision')
 row('inquiry-meta-platforms-ireland-limited-december-2022#2', 'IN-18-5-7', 'Meta/Instagram (legal basis for ads)', BT, 1,
-    'complaint', 'GDPR', '2018-08-20', 'month', '2022-12-31', 180000000, 1,
+    'complaint', 'GDPR', '2018-08-20', 'day', '2022-12-31', 180000000, 1,
     trigger='2018-05-25', trigger_type='noyb complaint (GDPR day one)',
-    note='Companion inquiry opened in same Aug 2018 batch; EDPB Art 65 binding decision')
+    note='Companion inquiry opened in same Aug 2018 batch; EDPB Art 65 binding decision; Notice of Commencement dated 20 August 2018 (fn. 401-402), day precision')
 # ---------------------------------------------------------------- 2023
 row('inquiry-whatsapp-ireland-ltd-january-2023', 'IN-18-5-6', 'WhatsApp Ireland (legal basis)', BT, 1,
     'complaint', 'GDPR', '2018-08-20', 'day', '2023-01-12', 5500000, 1,
@@ -171,12 +171,12 @@ row('inquiry-kildare-county-council-january-2023', '05-SIU-2018', 'Kildare Count
     'own-volition', 'LED', '2018-06-25', 'month', '2023-01-16', 50000, 0,
     note='SIU surveillance program June 2018')
 row('inquiry-centric-health-ltd-centric-february-2023', 'IN-21-2-4', 'Centric Health (ransomware)', PR, 0,
-    'own-volition (breach)', 'GDPR', '2021-03-01', 'day', '2023-02-23', 460000, 0,
+    'own-volition (breach)', 'GDPR', '2021-03-01', 'day', '2023-01-23', 460000, 0,
     trigger='2019-12-05', trigger_type='breach notified',
-    note='Commencement letter 1 Mar 2021 per decision; fines 275k+50k+135k')
+    note="Commencement letter 1 Mar 2021 per decision; fines 275k+50k+135k; decision dated 23 January 2023 on the PDF cover (AR2023: 'issued its Final Decision in this Inquiry in January 2023'); the DPC page's 23 Feb 2023 is the publication date")
 row('inquiry-bank-ireland-365-boi-february-2023', 'IN-20-7-2', 'Bank of Ireland 365', PR, 0,
-    'own-volition (breach)', 'GDPR', '2020-07-15', 'month', '2023-02-27', 750000, 0,
-    note='Commencement month from DPC ref convention (IN-20-7)')
+    'own-volition (breach)', 'GDPR', '2020-08-12', 'day', '2023-02-27', 750000, 0,
+    note='Commencement month from DPC ref convention (IN-20-7); Inquiry Commencement Letter 12 August 2020 per decision')
 row('inquiry-processing-church-records-archbishop-dublin', 'IN-19-7-6', 'Archbishop of Dublin (church records)', NP, 0,
     'complaint', 'GDPR', '2019-12-20', 'day', '2023-02-27', 0, 0,
     note='Commencement letter 20 Dec 2019 per decision')
@@ -222,8 +222,8 @@ row('groupon-ireland-operations-limited-march-2024', '', 'Groupon Ireland (acces
     'complaint', 'GDPR', '2019-02-01', 'day', '2024-03-08', 0, 0,
     note='DPC formally commenced investigation 1 Feb 2019 per decision')
 row('inquiry-concerning-mediahuis-ireland-group-limited', 'IN-21-2-6', 'Mediahuis Ireland (journalism complaint)', PR, 0,
-    'complaint', 'GDPR', '2021-02-15', 'month', '2024-06-07', 0, 0,
-    note='Commencement month from DPC ref convention (IN-21-2); complaint dismissed (journalism exemption)')
+    'complaint', 'GDPR', '2021-03-15', 'month', '2024-06-07', 0, 0,
+    note='No decision text published; DPC AR2024 says the complaint was received in March 2021, so commencement is March 2021 or later (the DPC ref convention had suggested February); complaint dismissed (journalism exemption)')
 row('inquiry-meta-platforms-ireland-limited-september-2024', 'IN-19-4-1', 'Meta/Facebook (plaintext passwords)', BT, 1,
     'own-volition (breach)', 'GDPR', '2019-04-24', 'day', '2024-09-26', 91000000, 0,
     trigger='2019-03-21', trigger_type='issue reported to DPC',
@@ -239,13 +239,13 @@ row('inquiry-maynooth-university', 'IN-19-9-3', 'Maynooth University', PB, 0,
     'own-volition (breach)', 'GDPR', '2019-11-07', 'day', '2024-11-22', 40000, 0,
     note='Commencement letter 7 Nov 2019 per decision; fines 25k+15k')
 row('inquiries-meta-platforms-ireland-limited-token-breach#1', 'IN-18-10-1', 'Meta/Facebook (token breach, notification)', BT, 1,
-    'own-volition (breach)', 'GDPR', '2018-10-03', 'day', '2024-12-12', 11000000, 0,
+    'own-volition (breach)', 'GDPR', '2018-10-18', 'day', '2024-12-12', 11000000, 0,
     trigger='2018-09-28', trigger_type='breach notified',
-    note='DPC announced statutory inquiry 3 Oct 2018 (press statement); fines 8m+3m under Art 33')
+    note="Article 33 decision, para 6: 'The DPC commenced an own-volition inquiry ... on 18 October 2018'; the 3 Oct 2018 press statement relates to the companion Art 25 inquiry (the DPC's two PDF file names are swapped); fines 8m+3m under Art 33")
 row('inquiries-meta-platforms-ireland-limited-token-breach#2', 'IN-18-11-1', 'Meta/Facebook (token breach, Art 25)', BT, 1,
-    'own-volition (breach)', 'GDPR', '2018-11-15', 'month', '2024-12-12', 240000000, 0,
+    'own-volition (breach)', 'GDPR', '2018-10-03', 'day', '2024-12-12', 240000000, 0,
     trigger='2018-09-28', trigger_type='breach notified',
-    note='Second token-breach inquiry; commencement month from DPC ref convention (IN-18-11); fines 130m+110m under Art 25')
+    note="Second token-breach inquiry; commencement month from DPC ref convention (IN-18-11); fines 130m+110m under Art 25; Article 25 decision, para 6: inquiry commenced 3 October 2018 (day precision); the DPC's two token-breach PDF file names are swapped")
 # ---------------------------------------------------------------- 2025-2026
 row('inquiry-tiktok-technology-limited', 'IN-21-9-2', 'TikTok (transfers to China)', BT, 1,
     'own-volition', 'GDPR', '2021-09-14', 'day', '2025-04-30', 530000000, 0,
@@ -254,15 +254,15 @@ row('inquiry-concerning-department-social-protection', 'IN-21-7-3', 'Dept of Soc
     'own-volition', 'GDPR', '2021-07-20', 'day', '2025-06-09', 550000, 0,
     note='Notice of Commencement 20 Jul 2021 per decision')
 row('inquiry-city-dublin-education-and-training-board-cdetb', 'IN-19-7-3', 'City of Dublin ETB (SUSI breach)', PB, 0,
-    'own-volition (breach)', 'GDPR', '2019-07-19', 'month', '2025-06-23', 125000, 0,
-    note='DPC summary: commenced July 2019 (same notice batch as UCD/ICB/Slane, 19 Jul 2019); fines 50k+15k+10k+50k')
+    'own-volition (breach)', 'GDPR', '2019-07-19', 'day', '2025-06-18', 125000, 0,
+    note="DPC summary: commenced July 2019 (same notice batch as UCD/ICB/Slane, 19 Jul 2019); fines 50k+15k+10k+50k; Inquiry Commencement Letter 19 July 2019 (para 50); decision 'made on 18 June 2025' per the corrigendum (page date 23 Jun 2025 is publication)")
 row('inquiry-microsoft-ireland-operations-limited-september-2025', '', 'Microsoft Ireland (access complaint)', BT, 1,
     'complaint', 'GDPR', '2023-05-16', 'day', '2025-09-01', 0, 0,
     note='Commenced 16 May 2023 per DPC summary')
 row('inquiry-concerning-university-limerick', 'IN-19-7-1', 'University of Limerick', PB, 0,
-    'own-volition (breach)', 'GDPR', '2019-07-19', 'month', '2025-12-10', 98000, 0,
+    'own-volition (breach)', 'GDPR', '2019-07-08', 'day', '2025-12-10', 98000, 0,
     trigger='2018-11-30', trigger_type='first of 12 breaches notified',
-    note='Ref IN-19-7-1; July 2019 breach-sweep batch (UCD/ICB/Slane notices dated 19 Jul 2019); fines total 98k per DPC')
+    note='Ref IN-19-7-1; July 2019 breach-sweep batch (UCD/ICB/Slane notices dated 19 Jul 2019); fines total 98k per DPC; Notice of Commencement of Inquiry 8 July 2019 per decision')
 row('inquiry-permanent-TSB-april-2026', 'IN-22-7-3', 'Permanent TSB', PR, 0,
     'own-volition (breach)', 'GDPR', '2022-08-24', 'day', '2026-04-30', 277500, 0,
     trigger='2022-05-26', trigger_type='breaches notified',
