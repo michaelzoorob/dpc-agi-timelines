@@ -12,9 +12,9 @@ scripts below.
 | File | What it is |
 |---|---|
 | `data/dpc_inquiries.csv` | 67 concluded DPC statutory inquiries / complaint decisions published under the Data Protection Act 2018 (Aug 2019 to Jun 2026). One row per inquiry with commencement date, decision date, duration, fine, sector, origin, legal regime, and a per-row source note. |
-| `data/dpc_open_inquiries.csv` | 21 notable cross-border inquiries with no published final decision as of 7 Sep 2026 (the Google location-data inquiry among them was decided on 21 Sep 2026, after the basis date; see its source note), with commencement dates and duration-so-far. |
-| `data/dpc_cases_combined.csv` | Spreadsheet-style table of all 88 cases (67 concluded + 21 open) on one common column set, for people who just want the case list. Built by `scripts/build_combined_csv.py`; open rows carry their age as of 7 Sep 2026. |
-| `data/agi_timelines.csv` | AGI arrival forecasts. Metaculus community quantiles (Q5121 general AI, Q3479 weakly general AI, captured 7 Sep 2026; the 29 Aug 2026 capture is kept in `data/raw/metaculus_questions_2026-08-29.json`), AI Impacts 2023 survey aggregates, XPT tournament probabilities. |
+| `data/dpc_open_inquiries.csv` | 21 cross-border inquiries with no published final decision as of 25 Sep 2026 (one of them, the Facebook Inc. token-breach inquiry, is recorded as discontinued in January 2022 per the DPC's own decision and is censored at that date), with commencement dates and duration-so-far. |
+| `data/dpc_cases_combined.csv` | Spreadsheet-style table of all 90 cases (69 concluded + 21 open) on one common column set, for people who just want the case list. Built by `scripts/build_combined_csv.py`; open rows carry their age as of 25 Sep 2026. |
+| `data/agi_timelines.csv` | AGI arrival forecasts. Metaculus community quantiles (Q5121 general AI, Q3479 weakly general AI, captured 25 Sep 2026; the 29 Aug and 7 Sep 2026 captures are kept in `data/raw/metaculus_questions_2026-08-29.json` and `data/raw/metaculus_questions_2026-09-07.json`), AI Impacts 2023 survey aggregates, XPT tournament probabilities. |
 | `data/agi_forecast_cdf.csv` | Year-by-year cumulative probability of AGI arrival from the two Metaculus community CDFs. |
 
 ## Scripts (run in this order)
@@ -40,8 +40,9 @@ scripts below.
   Commencement Letter date stated in the decision) to the DPC's final decision adoption
   date. This excludes pre-inquiry complaint handling (captured in `trigger_date` where
   known) and excludes post-decision appeals, so it understates end-to-end enforcement time.
-- 20 rows have month precision (day set to the 15th, or to the documented program start
-  for the June 2018 CCTV sweep). `commencement_precision` flags them.
+- 63 of the 69 concluded rows have a day-exact commencement date quoted from the decision or a
+  DPC release; the other six (all domestic) are flagged `inferred` in `commencement_precision`,
+  with the basis for the inference in the `note` column.
 - Eight decisions under the Law Enforcement Directive / Data Protection Act Part 5 are
   flagged `LED` and excluded from headline GDPR statistics.
 - The dataset covers final decisions published on the DPC's register. The register is
@@ -54,9 +55,11 @@ scripts below.
   roughly EUR 20.04m of the EUR 4.04bn imposed had been collected by end-2025
   (breakdown documented in scripts/analyze.py).
 - Concluded-only duration statistics are right-censored and understate true durations.
-  Headline statistics therefore center the Kaplan-Meier estimate: of 28 cross-border cases
-  begun by end-2020, 13 remained open in Sep 2026 (censored), giving a median time to
-  decision of 6.17 years versus 4.36 years from finished cases alone (see stats.md).
+  Headline statistics therefore center the Kaplan-Meier estimate: of 30 cross-border cases
+  begun by end-2020, 13 remained open on 25 Sep 2026 and one was discontinued in 2022 (both
+  censored), giving a median time to decision of 6.19 years versus 4.36 years from finished
+  cases alone (see stats.md). Without the three complaint-based decisions in that cohort the
+  survival curve never reaches 50%, so 6.2 years is a floor.
   Censored ages use latest-possible start dates, so the estimate is conservative.
 - Metaculus CDFs are the recency-weighted community aggregate embedded in the question
   pages (the public API requires authentication since 2024; captures in
@@ -67,7 +70,7 @@ scripts below.
 - DPC decisions register: https://www.dataprotection.ie/en/dpc-guidance/decisions
 - DPC annual reports 2018 to 2025 (inquiry counts, cross-border inquiry tables),
   downloadable from dataprotection.ie; PDFs are not committed (see .gitignore)
-- Metaculus Q5121, Q3479 (community forecasts, 1,837 and 1,719 forecasters at the 7 Sep 2026 capture)
+- Metaculus Q5121, Q3479 (community forecasts, 1,837 and 1,719 forecasters at the 25 Sep 2026 capture)
 - Grace et al. 2024, "Thousands of AI Authors on the Future of AI", arXiv:2401.02843
 - Karger et al. 2023, Existential Risk Persuasion Tournament, Forecasting Research Institute
 - ICCL enforcement tracking (Google adtech inquiry status)
@@ -80,3 +83,20 @@ scripts below.
   against the strong-AGI 25% and 50% horizons; Figure 1 in the write-up),
   `output/fig1_race.png` (Kaplan-Meier incidence vs the AGI forecast CDFs; Figure 2 in the
   write-up), `output/fig3_survival.png` (survival-curve view, repo only)
+
+
+## Changes on 25 Sep 2026
+
+Basis date moved from 7 Sep to 25 Sep 2026 after two rounds of independent review of the data (see the
+commit history). Concluded decisions now include the two the DPC announced but had not yet posted to its
+register by the basis date (Google location data, announced 21 Sep 2026, EUR 403m, dated by the
+announcement; HSE paper records, notified 25 Aug 2026, EUR 645k). The open list gained the Facebook
+behavioural-advertising inquiry (La Quadrature du Net complaint, 2018) and the second Instagram child-users
+inquiry (IN-20-7-3), and records the Facebook Inc. token-breach inquiry as discontinued on 10 Jan 2022 per
+footnote 16 of the Article 25 token-breach decision. Thirteen commencement dates were replaced with the exact
+dates stated in the decisions, UCD/Centric/CDETB decision dates were corrected to the dates on the decisions,
+and six rows whose decision gives no commencement date are now marked `inferred` with the reasoning in the
+source note. The DPC's annual reports list at least ten further final decisions from 2023 to 2025 (mostly
+no-infringement outcomes in complaint cases) that were never posted to the register; they are outside this
+dataset. The Kaplan-Meier cohort is every cross-border case in the dataset begun by end-2020 (statutory
+inquiries plus three complaint decisions); without the complaint decisions the median is not reached.

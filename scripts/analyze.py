@@ -18,7 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, '..')
 OUT = os.path.join(ROOT, 'output')
 os.makedirs(OUT, exist_ok=True)
-ASOF = dt.date(2026, 9, 7)
+ASOF = dt.date(2026, 9, 25)
 
 # ---------- palette (dataviz reference palette, light mode, validated) ----------
 BLUE, ORANGE, AQUA = '#2a78d6', '#eb6834', '#1baf7a'
@@ -46,7 +46,7 @@ fined = [r for r in gdpr if r['fine_eur'] > 0]
 fined1m = [r for r in gdpr if r['fine_eur'] >= 1_000_000]
 
 open_rows = list(csv.DictReader(open(os.path.join(ROOT, 'data', 'dpc_open_inquiries.csv'))))
-open_pre2021 = [r for r in open_rows if r['commencement_date'] <= '2020-12-31']
+open_pre2021 = [r for r in open_rows if r['commencement_date'] <= '2020-12-31' and r['status'] == 'no published final decision']
 
 # ---------- load Metaculus CDFs ----------
 qs = json.load(open(os.path.join(ROOT, 'data', 'raw', 'metaculus_questions.json')))
@@ -171,7 +171,7 @@ S['collected_share_of_imposed'] = round(COLLECTED_THROUGH_2025 / S['total_fines_
 # ---------- censoring-aware cohort view (cross-border cases begun by end-2020) ----------
 cohort_events = sorted(int(r['duration_days']) / 365.25 for r in rows
                        if r['cross_border'] and r['commencement_date'] <= '2020-12-31')
-cohort_censored = sorted((ASOF - dt.date.fromisoformat(r['commencement_date'])).days / 365.25 for r in open_rows
+cohort_censored = sorted(float(r[f'open_years_asof_{ASOF}']) for r in open_rows
                          if r['commencement_date'] <= '2020-12-31')
 combined = sorted(cohort_events + cohort_censored)
 n = len(combined)
@@ -267,6 +267,12 @@ fig.tight_layout()
 fig.savefig(os.path.join(OUT, 'fig3_survival.png'), bbox_inches='tight')
 plt.close(fig)
 
+_fined = [r for r in rows if r['cross_border'] and r['fine_eur'] >= 1e6]
+S['fined1m_min_duration'] = round(min(r['duration_years'] for r in _fined), 2)
+S['fined1m_n_longer_than_strong_median'] = sum(1 for r in _fined if r['duration_years'] > S['strong_median_years'])
+S['km_final_survival'] = round(km_steps[-1][1], 3)
+S['p_weak_already'] = round(weak.p_by_years(0.0), 3)
+S['p_strong_already'] = round(strong.p_by_years(0.0), 3)
 json.dump(S, open(os.path.join(OUT, 'stats.json'), 'w'), indent=1)
 
 # ---------- figure 1: the race (KM incidence vs AGI forecast CDFs) ----------
@@ -300,9 +306,9 @@ ax.annotate('weakly general AI\narrived (forecast)', xy=(1.75, 0.64), color='#cf
 ax.annotate('strong AGI\narrived (forecast)', xy=(8.15, 0.44), color='#b02a25', fontsize=8.5, fontweight='bold')
 ax.plot([S['km_median_years']], [0.5], marker='o', ms=6, color=BLUE, zorder=6)
 ax.annotate(f"median: {S['km_median_years']:.1f}y", xy=(S['km_median_years'] - 0.05, 0.5),
-            xytext=(4.55, 0.53), fontsize=8, color=INK2,
+            xytext=(4.55, 0.415), fontsize=8, color=INK2,
             arrowprops=dict(arrowstyle='-', color=MUTED, lw=0.8))
-ax.annotate(f'{km_steps[-1][1]:.0%} of the cohort still open\nwhen observation ends', xy=(6.55, 0.645),
+ax.annotate(f'{km_steps[-1][1]:.0%} of the cohort still open\nwhen observation ends', xy=(6.75, 0.30),
             fontsize=8, color=BLUE)
 ax.legend(loc='lower right', fontsize=6.6, frameon=False)
 fig.tight_layout()
@@ -310,31 +316,44 @@ fig.savefig(os.path.join(OUT, 'fig1_race.png'), bbox_inches='tight')
 plt.close(fig)
 
 # ---------- figure 2: durations vs the AGI horizons ----------
-land = [
-    ('2018 token breach', 'inquiries-meta-platforms-ireland-limited-token-breach#2'),
-    ('Behavioral-ads consent', 'inquiry-linkedin-ireland-unlimited-company-october-2024'),
-    ('Plaintext passwords', 'inquiry-meta-platforms-ireland-limited-september-2024'),
-    ('Forced-consent advertising', 'inquiry-meta-platforms-ireland-limited-december-2022#1'),
-    ('Transfers to China', 'inquiry-tiktok-technology-limited'),
-    ('EU-US data transfers', 'inquiry-concerning-data-transfers-eueea-us-meta-platforms-ireland-limited-its-facebook-service'),
-    ('Messaging-app transparency', 'decision-concerning-whatsapp-ireland-ltd'),
-    ('Children’s account defaults', 'inquiry-concerning-processing-personal-data-relating-child-users-instagram-social-networking-service'),
-]
+LABELS = {
+    'inquiries-meta-platforms-ireland-limited-token-breach#2': '2018 token breach, security',
+    'inquiries-meta-platforms-ireland-limited-token-breach#1': '2018 token breach, notification',
+    'inquiry-linkedin-ireland-unlimited-company-october-2024': 'Behavioral-ads consent',
+    'inquiry-meta-platforms-ireland-limited-september-2024': 'Plaintext passwords',
+    'inquiry-meta-platforms-ireland-limited-december-2022#1': 'Forced-consent advertising (two decisions)',
+    'inquiry-whatsapp-ireland-ltd-january-2023': 'Messaging-app forced consent',
+    'inquiry-tiktok-technology-limited': 'TikTok transfers to China',
+    'inquiry-concerning-data-transfers-eueea-us-meta-platforms-ireland-limited-its-facebook-service': 'EU-US data transfers',
+    'decision-concerning-whatsapp-ireland-ltd': 'Messaging-app transparency',
+    'inquiry-concerning-processing-personal-data-relating-child-users-instagram-social-networking-service': 'Children\u2019s account defaults',
+    'inquiry-tiktok-technology-limited-september-2023': 'TikTok children\u2019s defaults',
+    'inquiry-concerning-meta-dataset-november-2022': 'Scraped user data',
+    'inquiry-concerning-12-facebook-personal-data-breaches': 'Twelve 2018 breaches',
+    'data-protection-commission-fines-google-eu403-million-following-inquiry-googles-processing-location': 'Google location settings',
+}
+# same-day twin decisions on one matter are drawn as one bar with the combined fine
+COMBINE = {'inquiry-meta-platforms-ireland-limited-december-2022#2': 'inquiry-meta-platforms-ireland-limited-december-2022#1'}
+fined_rows = [r for r in rows if r['cross_border'] and r['fine_eur'] >= 1e6]
 sel = []
-for label, slug in land:
-    r = next(r for r in rows if r['slug'] == slug)
-    sel.append((label, r['duration_years'], r['fine_eur'], 'decided'))
+for r in sorted(fined_rows, key=lambda r: r['duration_years']):
+    if r['slug'] in COMBINE:
+        continue
+    fine = r['fine_eur'] + sum(x['fine_eur'] for x in fined_rows if COMBINE.get(x['slug']) == r['slug'])
+    sel.append((LABELS.get(r['slug'], r['entity']), r['duration_years'], fine, 'decided', r))
+S['fig1_n_decided'] = len(sel)
+S['fig1_n_decided_longer_than_strong_q25'] = sum(1 for t in sel if t[1] > S['strong_q25_years'])
 open_now = [
     ('Adtech real-time bidding', (ASOF - dt.date(2019, 5, 22)).days / 365.25),
     ('AI training, PaLM 2', (ASOF - dt.date(2024, 9, 12)).days / 365.25),
     ('AI training, Grok', (ASOF - dt.date(2025, 4, 11)).days / 365.25),
 ]
-sel += [(lab, d, None, 'open') for lab, d in open_now]
+sel += [(lab, d, None, 'open', None) for lab, d in open_now]
 sel.sort(key=lambda t: t[1])
 
-fig, ax = plt.subplots(figsize=(7.0, 4.45), dpi=300)
+fig, ax = plt.subplots(figsize=(7.0, 0.34 * len(sel) + 1.0), dpi=300)
 halo = dict(boxstyle='round,pad=0.12', facecolor='white', edgecolor='none', alpha=0.85)
-for i, (label, dur, fine, kind) in enumerate(sel):
+for i, (label, dur, fine, kind, _r) in enumerate(sel):
     if kind == 'decided':
         ax.barh(i, dur, height=0.55, color=BLUE, zorder=3)
         ftxt = f'€{fine/1e6:,.0f}m' if fine < 1e9 else f'€{fine/1e9:.1f}bn'
@@ -372,9 +391,9 @@ plt.close(fig)
 with open(os.path.join(OUT, 'table_flagship.csv'), 'w', newline='') as f:
     w = csv.writer(f)
     w.writerow(['case','commenced','decided','years','fine'])
-    for label, slug in land:
-        r = next(r for r in rows if r['slug'] == slug)
-        w.writerow([label, r['commencement_date'], r['decision_date'], r['duration_years'], r['fine_eur']])
+    for label, dur, fine, kind, r in sel:
+        if kind == 'decided':
+            w.writerow([label, r['commencement_date'], r['decision_date'], dur, fine])
 
 # ---------- stats.md ----------
 L = []

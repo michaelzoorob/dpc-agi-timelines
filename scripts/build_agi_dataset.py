@@ -2,7 +2,7 @@
 """Build the AGI timeline forecasts dataset.
 
 Primary source: Metaculus community forecasts (recency-weighted CDF), captured
-2026-09-07 from the rendered question pages (data/raw/metaculus_questions.json):
+2026-09-25 from the rendered question pages (data/raw/metaculus_questions.json):
 - Q5121 'When will the first general AI system be devised, tested, and publicly
   announced?' (strong/robust AGI operationalisation: adversarial Turing test, robotic
   assembly, high scores across SAT/Winogrande etc, unified system).
@@ -26,7 +26,7 @@ import json, csv, math, os, bisect
 import datetime as dt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ASOF = dt.date(2026, 9, 7)
+ASOF = dt.date(2026, 9, 25)
 
 def scale_to_value(x, sc):
     rmin, rmax, zp = sc['range_min'], sc['range_max'], sc.get('zero_point')

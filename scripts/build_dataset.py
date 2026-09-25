@@ -37,10 +37,10 @@ NP = 'nonprofit'
 
 # ---------------------------------------------------------------- 2019-2020
 row('inquiry-garda-siochana', '01-SIU-2018', 'An Garda Siochana (CCTV/ANPR)', PB, 0,
-    'own-volition', 'LED', '2018-06-25', 'month', '2019-08-23', 0, 0,
+    'own-volition', 'LED', '2018-06-25', 'inferred', '2019-08-23', 0, 0,
     note='SIU surveillance program; DPC AR2018 says SIU inquiries commenced June 2018; Limerick decision documents audits beginning 25 June 2018')
 row('inquiry-kerry-county-council', '02-SIU-2018', 'Kerry County Council (CCTV)', PB, 0,
-    'own-volition', 'LED', '2018-06-25', 'month', '2020-03-25', 0, 0,
+    'own-volition', 'LED', '2018-06-25', 'inferred', '2020-03-25', 0, 0,
     note='SIU surveillance program June 2018')
 row('inquiry-tusla-child-and-family-agency', 'IN-19-10-1', 'Tusla Child and Family Agency (1)', PB, 0,
     'own-volition (breach)', 'GDPR', '2019-10-24', 'day', '2020-04-07', 75000, 0,
@@ -64,8 +64,8 @@ row('inquiries-concerning-health-service-executive#2', 'IN-19-9-2', 'Health Serv
     'own-volition (breach)', 'GDPR', '2019-11-26', 'day', '2020-09-29', 0, 0,
     trigger='2019-05-01', trigger_type='breach notified',
     note='Second HSE inquiry; commencement month approximated (notice date not in available text); no additional fine given IN-19-9-1; Notice of Commencement 26 November 2019 (para 3.3)')
-row('inquiry-waterford-city-and-county-council', '06-SIU-2018', 'Waterford City & County Council (CCTV)', PB, 0,
-    'own-volition', 'LED', '2018-06-25', 'month', '2020-10-21', 0, 0,
+row('inquiry-waterford-city-and-county-council', '04-SIU-2018', 'Waterford City & County Council (CCTV)', PB, 0,
+    'own-volition', 'LED', '2018-06-25', 'day', '2020-10-21', 0, 0,
     note='SIU surveillance program June 2018')
 row('decision-concerning-ryanair-dac', '', 'Ryanair DAC', PR, 1,
     'complaint', 'GDPR', '2019-03-19', 'day', '2020-11-10', 0, 0,
@@ -76,7 +76,7 @@ row('inquiry-concerning-twitter-international-company-tic', 'IN-19-1-1', 'Twitte
     trigger='2019-01-08', trigger_type='breach notified',
     note='First DPC big-tech fine; first EDPB Art 65 dispute resolution')
 row('decision-concerning-groupon-international-limited', '', 'Groupon International Limited', PR, 1,
-    'complaint', 'GDPR', '2018-07-05', 'day', '2020-12-16', 0, 0,
+    'complaint', 'GDPR', '2019-02-01', 'day', '2020-12-16', 0, 0,
     trigger='2018-06-04', trigger_type='complaint (Polish DPA)',
     note='DPC accepted LSA role 5 Jul 2018 per decision; Art 60, no fine')
 # ---------------------------------------------------------------- 2021
@@ -103,7 +103,7 @@ row('inquiry-limerick-city-and-county-council', '03-SIU-2018', 'Limerick City & 
     note='Decision records audit opening phase commencing 25 June 2018')
 # ---------------------------------------------------------------- 2022
 row('inquiry-personal-injuries-assessment-board', 'IN-20-4-7', 'Personal Injuries Assessment Board', PB, 0,
-    'own-volition (breach)', 'GDPR', '2020-05-08', 'month', '2022-01-24', 0, 0,
+    'own-volition (breach)', 'GDPR', '2020-05-08', 'inferred', '2022-01-24', 0, 0,
     trigger='2019-12-10', trigger_type='breach notified',
     note='Commencement inferred as May 2020: the published decision gives no date, and the twin inquiry into the same lost USB device (IN-20-4-8) was commenced by letter of 8 May 2020; the DPC ref convention had suggested April')
 row('inquiry-consultancy-provider', 'IN-20-4-8', 'A Consultancy Provider (processor)', PR, 0,
@@ -114,7 +114,7 @@ row('inquiry-slane-credit-union', 'IN-19-7-5', 'Slane Credit Union', PR, 0,
     trigger='2018-11-30', trigger_type='breach notified',
     note='Inquiry Commencement Notice 19 Jul 2019 per decision')
 row('inquiry-bank-ireland-group-plc', 'IN-19-9-5', 'Bank of Ireland Group (CCR breaches)', PR, 0,
-    'own-volition (breach)', 'GDPR', '2019-11-12', 'month', '2022-03-14', 463000, 0,
+    'own-volition (breach)', 'GDPR', '2019-11-12', 'inferred', '2022-03-14', 463000, 0,
     trigger='2018-11-09', trigger_type='first of 22 breaches notified',
     note="Commencement letter undated in the decision text, but the appendix schedule records BOI's acknowledgement of the inquiry on 12 November 2019 and its reply to the commencement letter on 6 December 2019, so the inquiry commenced on or shortly before 12 Nov 2019 (the DPC ref convention had suggested September)")
 row('inquiry-concerning-12-facebook-personal-data-breaches', 'IN-18-11-5', 'Meta/Facebook (12 breaches 2018)', BT, 1,
@@ -144,7 +144,7 @@ row('inquiry-concerning-meta-dataset-november-2022', 'IN-21-4-2', 'Meta/Facebook
     'own-volition', 'GDPR', '2021-04-14', 'day', '2022-11-25', 265000000, 0,
     note='Commenced 14 Apr 2021 per decision after media reports of 533m-user scraped dataset')
 row('inquiry-garda-siochana-december-2022', 'IN-20-1-3', 'An Garda Siochana (Kilmainham station breach)', PB, 0,
-    'own-volition (breach)', 'LED', '2020-01-15', 'month', '2022-12-15', 0, 0,
+    'own-volition (breach)', 'LED', '2020-01-15', 'inferred', '2022-12-15', 0, 0,
     note="No decision text published; DPC page: LED (Part 5) inquiry into a breach at Kilmainham Garda Station that disclosed 108 people's names and addresses, decided 15 Dec 2022; commencement month from DPC ref convention (IN-20-1)")
 row('inquiry-virtue-integrated-elder-care-ltd-viec-december-2022', 'IN-21-2-5', 'Virtue Integrated Elder Care', PR, 0,
     'own-volition (breach)', 'GDPR', '2021-03-08', 'day', '2022-12-20', 100000, 0,
@@ -168,7 +168,7 @@ row('inquiry-whatsapp-ireland-ltd-january-2023', 'IN-18-5-6', 'WhatsApp Ireland 
     trigger='2018-05-25', trigger_type='noyb complaint (GDPR day one)',
     note='Commenced 20 Aug 2018 per decision; EDPB Art 65 binding decision')
 row('inquiry-kildare-county-council-january-2023', '05-SIU-2018', 'Kildare County Council (CCTV)', PB, 0,
-    'own-volition', 'LED', '2018-06-25', 'month', '2023-01-16', 50000, 0,
+    'own-volition', 'LED', '2018-06-25', 'day', '2023-01-16', 50000, 0,
     note='SIU surveillance program June 2018')
 row('inquiry-centric-health-ltd-centric-february-2023', 'IN-21-2-4', 'Centric Health (ransomware)', PR, 0,
     'own-volition (breach)', 'GDPR', '2021-03-01', 'day', '2023-01-23', 460000, 0,
@@ -178,7 +178,7 @@ row('inquiry-bank-ireland-365-boi-february-2023', 'IN-20-7-2', 'Bank of Ireland 
     'own-volition (breach)', 'GDPR', '2020-08-12', 'day', '2023-02-27', 750000, 0,
     note='Commencement month from DPC ref convention (IN-20-7); Inquiry Commencement Letter 12 August 2020 per decision')
 row('inquiry-processing-church-records-archbishop-dublin', 'IN-19-7-6', 'Archbishop of Dublin (church records)', NP, 0,
-    'complaint', 'GDPR', '2019-12-20', 'day', '2023-02-27', 0, 0,
+    'own-volition', 'GDPR', '2019-12-20', 'day', '2023-02-27', 0, 0,
     note='Commencement letter 20 Dec 2019 per decision')
 row('inquiry-concerning-data-transfers-eueea-us-meta-platforms-ireland-limited-its-facebook-service', 'IN-20-8-1', 'Meta/Facebook (EU-US transfers)', BT, 1,
     'own-volition', 'GDPR', '2020-08-28', 'day', '2023-05-12', 1200000000, 1,
@@ -193,8 +193,8 @@ row('inquiry-concerning-airbnb-ireland-uc-june-2023', '', 'Airbnb Ireland (compl
 row('inquiry-airbnb-ireland-uc-july-2023', '', 'Airbnb Ireland (complaint 3)', BT, 1,
     'complaint', 'GDPR', '2022-12-22', 'day', '2023-07-20', 0, 0,
     note='Commenced 22 Dec 2022 per DPC summary')
-row('inquiry-galway-county-council', '04-SIU-2018', 'Galway County Council (CCTV)', PB, 0,
-    'own-volition', 'LED', '2018-06-25', 'month', '2023-08-22', 0, 0,
+row('inquiry-galway-county-council', '06-SIU-2018', 'Galway County Council (CCTV)', PB, 0,
+    'own-volition', 'LED', '2018-06-25', 'day', '2023-08-22', 0, 0,
     note='SIU surveillance program June 2018')
 row('inquiry-tiktok-technology-limited-september-2023', 'IN-21-9-1', 'TikTok (child users)', BT, 1,
     'own-volition', 'GDPR', '2021-09-14', 'day', '2023-09-01', 345000000, 1,
@@ -222,7 +222,7 @@ row('groupon-ireland-operations-limited-march-2024', '', 'Groupon Ireland (acces
     'complaint', 'GDPR', '2019-02-01', 'day', '2024-03-08', 0, 0,
     note='DPC formally commenced investigation 1 Feb 2019 per decision')
 row('inquiry-concerning-mediahuis-ireland-group-limited', 'IN-21-2-6', 'Mediahuis Ireland (journalism complaint)', PR, 0,
-    'complaint', 'GDPR', '2021-03-15', 'month', '2024-06-07', 0, 0,
+    'complaint', 'GDPR', '2021-03-15', 'inferred', '2024-06-07', 0, 0,
     note='No decision text published; DPC AR2024 says the complaint was received in March 2021, so commencement is March 2021 or later (the DPC ref convention had suggested February); complaint dismissed (journalism exemption)')
 row('inquiry-meta-platforms-ireland-limited-september-2024', 'IN-19-4-1', 'Meta/Facebook (plaintext passwords)', BT, 1,
     'own-volition (breach)', 'GDPR', '2019-04-24', 'day', '2024-09-26', 91000000, 0,
@@ -233,7 +233,7 @@ row('inquiry-linkedin-ireland-unlimited-company-october-2024', 'IN-18-8-3', 'Lin
     trigger='2018-05-25', trigger_type='La Quadrature du Net complaint',
     note='Commenced 20 Aug 2018 per decision')
 row('inquiry-sligo-county-council', '07-SIU-2018', 'Sligo County Council (CCTV)', PB, 0,
-    'own-volition', 'LED', '2018-06-25', 'month', '2024-11-13', 29500, 0,
+    'own-volition', 'LED', '2018-06-25', 'day', '2024-11-13', 29500, 0,
     note='SIU surveillance program June 2018')
 row('inquiry-maynooth-university', 'IN-19-9-3', 'Maynooth University', PB, 0,
     'own-volition (breach)', 'GDPR', '2019-11-07', 'day', '2024-11-22', 40000, 0,
@@ -247,6 +247,12 @@ row('inquiries-meta-platforms-ireland-limited-token-breach#2', 'IN-18-11-1', 'Me
     trigger='2018-09-28', trigger_type='breach notified',
     note="Second token-breach inquiry; commencement month from DPC ref convention (IN-18-11); fines 130m+110m under Art 25; Article 25 decision, para 6: inquiry commenced 3 October 2018 (day precision); the DPC's two token-breach PDF file names are swapped")
 # ---------------------------------------------------------------- 2025-2026
+row('data-protection-commission-fines-google-eu403-million-following-inquiry-googles-processing-location', '', 'Google Ireland (location data)', BT, 1,
+    'own-volition', 'GDPR', '2020-02-04', 'day', '2026-09-21', 403000000, 0,
+    note='Own-volition inquiry announced 4 Feb 2020; final decision announced by DPC news release on 21 Sep 2026 (the announcement date is used as the decision date; the decision text was not yet on the register at the 25 Sep 2026 basis date); fines totalling EUR 403m')
+row('data-protection-commission-announces-final-decision-following-inquiry-health-service-executive-hse', '', 'Health Service Executive (paper records)', PB, 0,
+    'own-volition', 'GDPR', '2024-05-24', 'day', '2026-08-25', 645000, 0,
+    note='Inquiry commenced 24 May 2024 (DPC release 29 May 2024); decision notified to the HSE on 25 Aug 2026 and announced 2 Sep 2026; not yet on the register at the 25 Sep 2026 basis date; fine EUR 645,000')
 row('inquiry-tiktok-technology-limited', 'IN-21-9-2', 'TikTok (transfers to China)', BT, 1,
     'own-volition', 'GDPR', '2021-09-14', 'day', '2025-04-30', 530000000, 0,
     note='Commenced 14 Sep 2021 per decision; fines 485m+45m; transfer suspension order')

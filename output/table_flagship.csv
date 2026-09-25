@@ -1,9 +1,15 @@
 case,commenced,decided,years,fine
-2018 token breach,2018-10-03,2024-12-12,6.19,240000000
-Behavioral-ads consent,2018-08-20,2024-10-22,6.17,310000000
-Plaintext passwords,2019-04-24,2024-09-26,5.43,91000000
-Forced-consent advertising,2018-08-20,2022-12-31,4.36,210000000
-Transfers to China,2021-09-14,2025-04-30,3.62,530000000
-EU-US data transfers,2020-08-28,2023-05-12,2.7,1200000000
-Messaging-app transparency,2018-12-10,2021-08-20,2.69,225000000
+Scraped user data,2021-04-14,2022-11-25,1.62,265000000
 Children’s account defaults,2020-09-21,2022-09-02,1.95,405000000
+TikTok children’s defaults,2021-09-14,2023-09-01,1.96,345000000
+Messaging-app transparency,2018-12-10,2021-08-20,2.69,225000000
+EU-US data transfers,2020-08-28,2023-05-12,2.7,1200000000
+Twelve 2018 breaches,2018-12-11,2022-03-15,3.26,17000000
+TikTok transfers to China,2021-09-14,2025-04-30,3.62,530000000
+Forced-consent advertising (two decisions),2018-08-20,2022-12-31,4.36,390000000
+Messaging-app forced consent,2018-08-20,2023-01-12,4.4,5500000
+Plaintext passwords,2019-04-24,2024-09-26,5.43,91000000
+"2018 token breach, notification",2018-10-18,2024-12-12,6.15,11000000
+Behavioral-ads consent,2018-08-20,2024-10-22,6.17,310000000
+"2018 token breach, security",2018-10-03,2024-12-12,6.19,240000000
+Google location settings,2020-02-04,2026-09-21,6.63,403000000
