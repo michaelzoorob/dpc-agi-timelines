@@ -27,7 +27,7 @@ opn = load('data', 'dpc_open_inquiries.csv')
 mil = load('data', 'dpc_procedural_milestones.csv')
 unreg = load('data', 'dpc_unregistered_decisions_2023_2025.csv')
 ar = {y: open(os.path.join(ROOT, 'data', 'raw', 'annual_reports', f'AR{y}.txt'), encoding='utf-8').read().split('\n')
-      for y in (2020, 2025)}
+      for y in (2020,)}
 
 
 def yrs(a, b):
@@ -158,7 +158,7 @@ add('km_open_at_strong_median', 'summary', '66% of the 2018-2020 cross-border ca
     pct(s_at) == '66%' and f'{t_s:.1f}' == '4.5')
 
 add('strong_agi_median', 'summary; forecasts paragraph',
-    "Metaculus's median forecast for strong AGI is 4.5 years out / its 1,843 forecasters put the median arrival at March 2031 (4.5 years out)",
+    "Metaculus’s median forecast for strong AGI is 4.5 years out / its 1,843 forecasters put the median arrival at March 2031 (4.5 years out)",
     '4.5 years; March 2031; 1,843 forecasters', f'{t_s:.3f} years ({when(t_s)}); {strong.n} forecasters',
     'Metaculus question 5121 community forecast captured 25 Sep 2026 (data/raw/metaculus_questions.json); output/stats.json strong_median_years, metaculus_strong_n',
     f'{t_s:.1f}' == '4.5' and when(t_s) == 'March 2031' and strong.n == 1843)
@@ -181,7 +181,7 @@ add('weak_agi_median', 'forecasts paragraph', 'weaker AGI with a median in Septe
     when(t_w) == 'September 2027' and 0.9 < t_w < 1.1)
 
 med_g = st.median(float(r['duration_years']) for r in gdpr)
-add('gdpr_median', 'first body paragraph', 'Of the 61 concluded GDPR cases, the median investigation took 1.9 years', '61; 1.9 years',
+add('gdpr_median', 'first body paragraph', 'Of 61 concluded GDPR cases, the median investigation took 1.9 years', '61; 1.9 years',
     f'{len(gdpr)} cases; median {med_g:.3f} years', 'GDPR rows of data/dpc_inquiries.csv; output/stats.json n_gdpr, median_gdpr_years',
     len(gdpr) == 61 and f'{med_g:.1f}' == '1.9')
 
@@ -205,7 +205,7 @@ add('linkedin_duration', 'first body paragraph', 'LinkedIn’s behavioral advert
 tu = next(r for r in dec if r['slug'] == 'inquiry-midlands-regional-hospital-tullamore')
 tu_inq = yrs(tu['commencement_date'], tu['decision_date'])
 add('tullamore_span', 'first body paragraph; simpler-rule paragraph',
-    'reported ransomware ... in November 2018, and the final decision came in June 2026 (7.6 years later) / Whether a hospital’s security measures were “appropriate” took more than six years',
+    'reported ransomware ... in November 2018; the final decision came in June 2026 (7.6 years later) / Whether a hospital’s security measures were “appropriate” took more than six years',
     '7.6 years; more than six years',
     f"{yrs(tu['trigger_date'], tu['decision_date']):.3f} years from the breach report ({tu['trigger_date']} to {tu['decision_date']}); inquiry {tu_inq:.3f} years ({tu['commencement_date']} to {tu['decision_date']})",
     'trigger_date, commencement_date and decision_date of the Tullamore row in data/dpc_inquiries.csv (https://www.dataprotection.ie/en/dpc-guidance/decisions/inquiry-midlands-regional-hospital-tullamore); output/stats.json tullamore_breach_to_decision',
@@ -249,12 +249,6 @@ add('collected_through_2025', 'second body paragraph; table', 'roughly €20 mil
     'roughly €20 million', f'EUR {col:,} ({col / imp25:.2%} of fines imposed through 2025)',
     'COLLECTED_THROUGH_2025 in scripts/analyze.py (collections itemised from DPC annual reports 2020-2025); output/stats.json collected_through_2025_eur',
     round(col / 1e6) == 20)
-
-l1, l2 = ' '.join(ar[2025][2371:2373]), ar[2025][2381]
-add('ar2025_caseload', 'second body paragraph', 'The DPC ended 2025 with 87 open statutory inquiries (53 of them cross-border) while issuing just 10 final decisions that year',
-    '87; 53; 10', f'AR2025: "{l1.strip()}" / "{l2.strip()}"',
-    'DPC Annual Report 2025 (https://www.dataprotection.ie/sites/default/files/uploads/2026-06/DPC-Annual-Report-2025-Digital-AW.pdf), committed text data/raw/annual_reports/AR2025.txt lines 2372-2373 and 2382',
-    '87' in l1 and '53' in ar[2025][2372] and '10 Final Decisions' in l2)
 
 add('fig2_censored', 'Figure 2 caption', 'counting the 14 still-open or discontinued cases as censored', '14', f'{len(ce)} censored cases',
     'rows of data/dpc_open_inquiries.csv begun by the end of 2020; output/stats.json cohort_n_still_open', len(ce) == 14)

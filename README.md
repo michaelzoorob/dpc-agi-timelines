@@ -108,7 +108,8 @@ counted, the statutory inquiries alone reach a Kaplan-Meier median of 6.6 years,
 because including the three complaint decisions lowers it. No analysis output changed. A later pass added the
 two remaining unchecked phrases (the hospital inquiry's "more than six years" and the Tinder draft decision
 arriving "more than six years in") to existing rows, and a row for the eight months between X's August 2024
-High Court undertaking and the DPC's April 2025 Grok inquiry.
+High Court undertaking and the DPC's April 2025 Grok inquiry. The row for the 2025 annual report's caseload (87 open
+inquiries, 10 final decisions) was dropped when that sentence left the write-up.
 
 ## Changes on 25 Sep 2026
 
