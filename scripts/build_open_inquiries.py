@@ -46,7 +46,7 @@ ROWS = [
  ('Yelp', 'Articles 5, 6, 7, 17 compliance',
   '2020-12-31', 'by_year_end', 'listed open in AR2020 cross-border table'),
  ('MTCH Technology (Tinder)', 'transparency, data subject rights, retention',
-  '2020-02-04', 'day', 'DPC press release 4 Feb 2020; draft decision Jan 2024; no final decision per Match Group filings'),
+  '2020-02-04', 'day', 'DPC press release 4 Feb 2020; Match Group 10-Q for Q2 2026 (filed 5 Aug 2026, https://www.sec.gov/Archives/edgar/data/891103/000089110326000130/mtch-20260630.htm): Match answered the preliminary draft decision on 15 Mar 2024 and the DPC issued its draft decision on 9 Jul 2026 (proposed fine EUR 8-11m); no final decision'),
  ('Twitter International (datasets / scraping)', 'security of processing, datasets of about 5.4 million users',
   '2022-12-23', 'day', 'DPC announcement 23 Dec 2022; AR2023: issues paper and submissions Nov 2023, preliminary draft decision in preparation; no published decision'),
  ('TikTok Technology (China servers, second inquiry)', 'transfers to and storage on servers in China',
@@ -63,18 +63,33 @@ ROWS = [
   '2026-02-16', 'day', 'DPC press release 17 Feb 2026 announcing a further investigation into XIUC'),
 ]
 
+# Open inquiries with no DPC status report after the annual report named here (the DPC's last word on
+# each one). A second, blind review of AR2018-AR2025 found no later mention, so their status after that
+# report is unverified; they are counted as still open (censored) in the Kaplan-Meier estimate.
+NO_STATUS_REPORT_SINCE = {
+    'Quantcast International': 'AR2021 (statement of issues, Dec 2021)',
+    'Twitter International (breach volume)': 'AR2022 (decision-making stage since Feb 2022)',
+    'Yelp': 'AR2023 (preliminary draft decision in preparation)',
+    'Verizon Media / Oath (Yahoo)': 'AR2023 (Art 60 draft of Oct 2022 still in process)',
+    'Apple Distribution International (transparency)': 'AR2020 (cross-border table)',
+    'Apple Distribution International (right of access)': 'AR2020 (cross-border table)',
+    'Twitter International (access to links)': 'AR2020 (cross-border table)',
+}
+
 def main():
     out = os.path.join(os.path.dirname(__file__), '..', 'data', 'dpc_open_inquiries.csv')
     with open(out, 'w', newline='') as f:
         w = csv.writer(f)
         w.writerow(['entity','subject','commencement_date','commencement_precision',
-                    f'open_years_asof_{ASOF}','status','source'])
+                    f'open_years_asof_{ASOF}','status','source','no_dpc_status_report_since'])
         for row_ in ROWS:
             e, s, c, p, src = row_[:5]
             end = dt.date.fromisoformat(row_[5]) if len(row_) > 5 else ASOF
             status = row_[6] if len(row_) > 6 else 'no published final decision'
             yrs = round((end - dt.date.fromisoformat(c)).days / 365.25, 2)
-            w.writerow([e, s, c, p, yrs, status, src])
+            w.writerow([e, s, c, p, yrs, status, src, NO_STATUS_REPORT_SINCE.get(e, '')])
+    missing = set(NO_STATUS_REPORT_SINCE) - {r[0] for r in ROWS}
+    assert not missing, f"NO_STATUS_REPORT_SINCE names unknown rows: {missing}"
     print(f"wrote {len(ROWS)} rows -> {out}")
 
 if __name__ == '__main__':

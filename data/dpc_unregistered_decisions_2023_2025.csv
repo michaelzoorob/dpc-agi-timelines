@@ -1,0 +1,11 @@
+decision_date,controller,kind,outcome,ar_reported,annual_report_lines,edpb_register_ref
+2023-01-09,Airbnb Ireland UC,inquiry into a complaint,"no infringement (Arts 5, 6, 13)",1,data/raw/annual_reports/AR2023.txt lines 3150-3155,EDPBI:IE:OSS:D:2023:644
+2023-03-29,Meta Platforms Ireland Limited,complaint decision (s.113),no violation,0,,EDPBI:IE:OSS:D:2023:701
+2023-06-14,Airbnb Ireland UC,inquiry into a complaint,"no infringement (Arts 5, 6, 12, 17)",1,data/raw/annual_reports/AR2023.txt lines 3157-3162,EDPBI:IE:OSS:D:2023:796
+2023-11,Apple Distribution International Limited,inquiry into cross-border complaints,"no infringement (Arts 5, 6, 7, 13)",1,data/raw/annual_reports/AR2023.txt lines 3202-3208,
+2024-02-29,Apple Distribution International Limited,inquiry into a complaint,no infringement,1,data/raw/annual_reports/AR2024.txt lines 2006-2013,EDPBI:IE:OSS:D:2024:1140
+2025-02-20,Microsoft Ireland Operations Limited,complaint decision,no infringement; complaint dismissed,1,data/raw/annual_reports/AR2025.txt lines 2399-2411,EDPBI:IE:OSS:D:2025:1659
+2025-04-03,Patreon Ireland Ltd,complaint decision,"reprimand (Art 12(2), 12(3))",1,data/raw/annual_reports/AR2025.txt lines 2413-2422,EDPBI:IE:OSS:D:2025:3396
+2025-05-06,Yahoo EMEA Limited,complaint decision,reprimand,1,data/raw/annual_reports/AR2025.txt lines 2432-2437,EDPBI:IE:OSS:D:2025:3446
+2025-07-28,Cubic Telecom,complaint decision,reprimand (Art 15),1,data/raw/annual_reports/AR2025.txt lines 2491-2498,EDPBI:IE:OSS:D:2025:3537
+2025-08-05,Meta Platforms Ireland Limited,complaint decision,no infringement (Art 15(4)),1,data/raw/annual_reports/AR2025.txt lines 2500-2510,EDPBI:IE:OSS:D:2025:3559
