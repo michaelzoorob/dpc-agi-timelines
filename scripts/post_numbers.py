@@ -200,12 +200,12 @@ add('fined1m_median', 'first body paragraph', 'The 15 cases that ended in fines 
 li = next(r for r in dec if r['slug'] == 'inquiry-linkedin-ireland-unlimited-company-october-2024')
 add('linkedin_duration', 'first body paragraph', 'LinkedIn’s behavioral advertising case took 6.2 years from inquiry to decision', '6.2 years',
     f"{yrs(li['commencement_date'], li['decision_date']):.3f} years ({li['commencement_date']} to {li['decision_date']})",
-    'data/dpc_inquiries.csv row inquiry-linkedin-ireland-unlimited-company-october-2024', f"{yrs(li['commencement_date'], li['decision_date']):.1f}" == '6.2')
+    'data/dpc_inquiries.csv row inquiry-linkedin-ireland-unlimited-company-october-2024 (https://www.dataprotection.ie/en/dpc-guidance/decisions/inquiry-linkedin-ireland-unlimited-company-october-2024)', f"{yrs(li['commencement_date'], li['decision_date']):.1f}" == '6.2')
 
 tu = next(r for r in dec if r['slug'] == 'inquiry-midlands-regional-hospital-tullamore')
 add('tullamore_span', 'first body paragraph', 'reported ransomware ... in November 2018, and the final decision came in June 2026 (7.6 years later)', '7.6 years',
     f"{yrs(tu['trigger_date'], tu['decision_date']):.3f} years ({tu['trigger_date']} to {tu['decision_date']})",
-    'trigger_date and decision_date of the Tullamore row in data/dpc_inquiries.csv; output/stats.json tullamore_breach_to_decision',
+    'trigger_date and decision_date of the Tullamore row in data/dpc_inquiries.csv (https://www.dataprotection.ie/en/dpc-guidance/decisions/inquiry-midlands-regional-hospital-tullamore); output/stats.json tullamore_breach_to_decision',
     f"{yrs(tu['trigger_date'], tu['decision_date']):.1f}" == '7.6')
 
 line = ar[2020][2720]
@@ -215,7 +215,7 @@ n_disc = sum(1 for r in open20 if r['status'].startswith('discontinued'))
 add('cohort_2020_status', 'second body paragraph',
     'Of the 27 open cross-border investigations at the end of 2020, 13 were still open as of 25 September 2026 and one more had been discontinued',
     '27; 13 open; 1 discontinued', f'AR2020: "{line.strip()}"; reconstructed {len(stat_dec)} later decided + {n_open} open + {n_disc} discontinued',
-    'data/raw/annual_reports/AR2020.txt line 2721; statutory cross-border inquiries begun by end-2020 in data/dpc_inquiries.csv and data/dpc_open_inquiries.csv',
+    'DPC Annual Report 2020 (https://www.dataprotection.ie/sites/default/files/uploads/2021-05/DPC%202020%20Annual%20Report%20%28English%29.pdf), committed text data/raw/annual_reports/AR2020.txt line 2721; statutory cross-border inquiries begun by end-2020 in data/dpc_inquiries.csv and data/dpc_open_inquiries.csv',
     '27 cross-border' in line and len(stat_dec) + n_open + n_disc == 27 and n_open == 13 and n_disc == 1)
 
 g = next(r for r in opn if r['entity'].startswith('Google Ireland (adtech'))
@@ -227,12 +227,12 @@ tn = next(r for r in opn if 'Tinder' in r['entity'])
 a_t = yrs(tn['commencement_date'], ASOF.isoformat())
 add('tinder_open', 'second body paragraph', 'Tinder’s has been open 6.6 years (the DPC sent the company a draft decision in July 2026)', '6.6 years; July 2026',
     f"{a_t:.3f} years (since {tn['commencement_date']}); draft decision 9 Jul 2026 per Match Group 10-Q",
-    'data/dpc_open_inquiries.csv, Tinder row (source column cites the 10-Q)', f'{a_t:.1f}' == '6.6' and '9 Jul 2026' in tn['source'])
+    'data/dpc_open_inquiries.csv, Tinder row; Match Group 10-Q filed 5 Aug 2026 (https://www.sec.gov/Archives/edgar/data/891103/000089110326000130/mtch-20260630.htm)', f'{a_t:.1f}' == '6.6' and '9 Jul 2026' in tn['source'])
 
 gl = next(r for r in dec if r['entity'].startswith('Google Ireland (location'))
 add('google_location', 'second body paragraph', 'a €403 million fine announced on 21 September 2026, 6.6 years after it opened', '€403 million; 6.6 years',
     f"EUR {int(gl['fine_eur']):,}; {yrs(gl['commencement_date'], gl['decision_date']):.3f} years ({gl['commencement_date']} to {gl['decision_date']})",
-    'data/dpc_inquiries.csv, Google location-data row', int(gl['fine_eur']) == 403_000_000 and f"{yrs(gl['commencement_date'], gl['decision_date']):.1f}" == '6.6')
+    'data/dpc_inquiries.csv, Google location-data row; DPC announcement (https://www.dataprotection.ie/en/news-media/latest-news/data-protection-commission-fines-google-eu403-million-following-inquiry-googles-processing-location)', int(gl['fine_eur']) == 403_000_000 and f"{yrs(gl['commencement_date'], gl['decision_date']):.1f}" == '6.6')
 
 imp25 = sum(int(r['fine_eur']) for r in dec if r['decision_date'] <= '2025-12-31')
 add('imposed_through_2025', 'second body paragraph', 'By the end of 2025 the DPC had imposed €4.04 billion in fines', '€4.04 billion',
@@ -247,7 +247,7 @@ add('collected_through_2025', 'second body paragraph; table', 'roughly €20 mil
 l1, l2 = ' '.join(ar[2025][2371:2373]), ar[2025][2381]
 add('ar2025_caseload', 'second body paragraph', 'The DPC ended 2025 with 87 open statutory inquiries (53 of them cross-border) while issuing just 10 final decisions that year',
     '87; 53; 10', f'AR2025: "{l1.strip()}" / "{l2.strip()}"',
-    'data/raw/annual_reports/AR2025.txt lines 2372-2373 and 2382 (DPC Annual Report 2025)',
+    'DPC Annual Report 2025 (https://www.dataprotection.ie/sites/default/files/uploads/2026-06/DPC-Annual-Report-2025-Digital-AW.pdf), committed text data/raw/annual_reports/AR2025.txt lines 2372-2373 and 2382',
     '87' in l1 and '53' in ar[2025][2372] and '10 Final Decisions' in l2)
 
 add('fig2_censored', 'Figure 2 caption', 'counting the 14 still-open or discontinued cases as censored', '14', f'{len(ce)} censored cases',
@@ -281,7 +281,7 @@ add('ai_training_open', 'AI-training paragraph', 'Neither case has been decided 
 ph = next(r for r in dec if 'pre-hospital' in r['slug'])
 add('phecc_duration', 'simpler-rule paragraph; table', 'Investigating whether a public body had appointed a data protection officer took 81 days', '81 days',
     f"{ph['duration_days']} days ({ph['commencement_date']} to {ph['decision_date']})",
-    'data/dpc_inquiries.csv, Pre-Hospital Emergency Care Council row', ph['duration_days'] == '81')
+    'data/dpc_inquiries.csv, Pre-Hospital Emergency Care Council row (https://www.dataprotection.ie/en/dpc-guidance/decisions/inquiry-pre-hospital-emergency-care-council)', ph['duration_days'] == '81')
 
 before = sum(int(r['days_before_draft']) for r in mil)
 after = sum(int(r['days_after_draft']) for r in mil)
@@ -329,7 +329,7 @@ add('unregistered_decisions', 'note', 'The annual reports mention at least nine 
 sp1, sp2 = yrs('2018-08-13', '2022-11-14'), yrs('2022-11-14', '2026-09-21')
 add('footnote_spans', 'footnote', 'opened after an August 2018 AP story and settled in November 2022, 4.3 years later ... almost four years after the US settlement',
     '4.3 years; almost four years', f'AP story 2018-08-13 to settlement 2022-11-14: {sp1:.3f} years; settlement to DPC decision 2026-09-21: {sp2:.3f} years',
-    'publication and settlement dates of the linked sources', f'{sp1:.1f}' == '4.3' and 3.5 < sp2 < 4)
+    'AP story published 13 Aug 2018; 40-state settlement announced 14 Nov 2022 (https://www.michigan.gov/ag/news/press-releases/2022/11/14/40-attorneys-general-announce-historic-google-settlement-over-location-tracking-practices); DPC decision 21 Sep 2026', f'{sp1:.1f}' == '4.3' and 3.5 < sp2 < 4)
 
 out = os.path.join(ROOT, 'output', 'post_numbers.csv')
 with open(out, 'w', newline='', encoding='utf-8') as f:
