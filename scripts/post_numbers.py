@@ -326,10 +326,10 @@ add('unregistered_decisions', 'note', 'The annual reports mention at least nine 
     'data/dpc_unregistered_decisions_2023_2025.csv (scripts/build_unregistered_decisions.py, each row checked against the annual-report text)',
     len(u_ar) == 9 and n_noinf > len(u_ar) / 2)
 
-sp1, sp2 = yrs('2018-08-13', '2022-11-14'), yrs('2022-11-14', '2026-09-21')
-add('footnote_spans', 'footnote', 'opened after an August 2018 AP story and settled in November 2022, 4.3 years later ... almost four years after the US settlement',
-    '4.3 years; almost four years', f'AP story 2018-08-13 to settlement 2022-11-14: {sp1:.3f} years; settlement to DPC decision 2026-09-21: {sp2:.3f} years',
-    'AP story published 13 Aug 2018; 40-state settlement announced 14 Nov 2022 (https://www.michigan.gov/ag/news/press-releases/2022/11/14/40-attorneys-general-announce-historic-google-settlement-over-location-tracking-practices); DPC decision 21 Sep 2026', f'{sp1:.1f}' == '4.3' and 3.5 < sp2 < 4)
+sp1 = yrs('2018-08-13', '2022-11-14')
+add('footnote_spans', 'footnote', 'opened after an August 2018 AP story and settled in November 2022, 4.3 years later',
+    '4.3 years', f'AP story 2018-08-13 to settlement 2022-11-14: {sp1:.3f} years',
+    'AP story published 13 Aug 2018 (https://apnews.com/article/828aefab64d4411bac257a07c1af0ecb); 40-state settlement announced 14 Nov 2022 (https://www.michigan.gov/ag/news/press-releases/2022/11/14/40-attorneys-general-announce-historic-google-settlement-over-location-tracking-practices)', f'{sp1:.1f}' == '4.3')
 
 xg = next(r for r in opn if r['entity'].startswith('X Internet Unlimited Company (Grok AI training'))
 x_months = (D(xg['commencement_date']) - D('2024-08-08')).days / (365.25 / 12)

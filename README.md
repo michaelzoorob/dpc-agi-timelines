@@ -109,7 +109,8 @@ because including the three complaint decisions lowers it. No analysis output ch
 two remaining unchecked phrases (the hospital inquiry's "more than six years" and the Tinder draft decision
 arriving "more than six years in") to existing rows, and a row for the eight months between X's August 2024
 High Court undertaking and the DPC's April 2025 Grok inquiry. The row for the 2025 annual report's caseload (87 open
-inquiries, 10 final decisions) was dropped when that sentence left the write-up.
+inquiries, 10 final decisions) was dropped when that sentence left the write-up, as was the footnote's
+"almost four years" after the US settlement.
 
 ## Changes on 25 Sep 2026
 
