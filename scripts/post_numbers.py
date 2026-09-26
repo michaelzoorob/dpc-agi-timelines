@@ -203,10 +203,13 @@ add('linkedin_duration', 'first body paragraph', 'LinkedIn’s behavioral advert
     'data/dpc_inquiries.csv row inquiry-linkedin-ireland-unlimited-company-october-2024 (https://www.dataprotection.ie/en/dpc-guidance/decisions/inquiry-linkedin-ireland-unlimited-company-october-2024)', f"{yrs(li['commencement_date'], li['decision_date']):.1f}" == '6.2')
 
 tu = next(r for r in dec if r['slug'] == 'inquiry-midlands-regional-hospital-tullamore')
-add('tullamore_span', 'first body paragraph', 'reported ransomware ... in November 2018, and the final decision came in June 2026 (7.6 years later)', '7.6 years',
-    f"{yrs(tu['trigger_date'], tu['decision_date']):.3f} years ({tu['trigger_date']} to {tu['decision_date']})",
-    'trigger_date and decision_date of the Tullamore row in data/dpc_inquiries.csv (https://www.dataprotection.ie/en/dpc-guidance/decisions/inquiry-midlands-regional-hospital-tullamore); output/stats.json tullamore_breach_to_decision',
-    f"{yrs(tu['trigger_date'], tu['decision_date']):.1f}" == '7.6')
+tu_inq = yrs(tu['commencement_date'], tu['decision_date'])
+add('tullamore_span', 'first body paragraph; simpler-rule paragraph',
+    'reported ransomware ... in November 2018, and the final decision came in June 2026 (7.6 years later) / Whether a hospital’s security measures were “appropriate” took more than six years',
+    '7.6 years; more than six years',
+    f"{yrs(tu['trigger_date'], tu['decision_date']):.3f} years from the breach report ({tu['trigger_date']} to {tu['decision_date']}); inquiry {tu_inq:.3f} years ({tu['commencement_date']} to {tu['decision_date']})",
+    'trigger_date, commencement_date and decision_date of the Tullamore row in data/dpc_inquiries.csv (https://www.dataprotection.ie/en/dpc-guidance/decisions/inquiry-midlands-regional-hospital-tullamore); output/stats.json tullamore_breach_to_decision',
+    f"{yrs(tu['trigger_date'], tu['decision_date']):.1f}" == '7.6' and 6 < tu_inq < 7)
 
 line = ar[2020][2720]
 stat_dec = [r for r in xb20 if not is_complaint_decision(r)]
@@ -225,9 +228,12 @@ add('adtech_open', 'second body paragraph; probability paragraph', 'Google’s r
 
 tn = next(r for r in opn if 'Tinder' in r['entity'])
 a_t = yrs(tn['commencement_date'], ASOF.isoformat())
-add('tinder_open', 'second body paragraph', 'Tinder’s has been open 6.6 years (the DPC sent the company a draft decision in July 2026)', '6.6 years; July 2026',
-    f"{a_t:.3f} years (since {tn['commencement_date']}); draft decision 9 Jul 2026 per Match Group 10-Q",
-    'data/dpc_open_inquiries.csv, Tinder row; Match Group 10-Q filed 5 Aug 2026 (https://www.sec.gov/Archives/edgar/data/891103/000089110326000130/mtch-20260630.htm)', f'{a_t:.1f}' == '6.6' and '9 Jul 2026' in tn['source'])
+t_draft = yrs(tn['commencement_date'], '2026-07-09')
+add('tinder_open', 'second body paragraph', 'Tinder’s has been open 6.6 years (the DPC sent the company a draft decision in July 2026, more than six years in)',
+    '6.6 years; July 2026; more than six years in',
+    f"{a_t:.3f} years (since {tn['commencement_date']}); draft decision 9 Jul 2026 per Match Group 10-Q, {t_draft:.3f} years after commencement",
+    'data/dpc_open_inquiries.csv, Tinder row; Match Group 10-Q filed 5 Aug 2026 (https://www.sec.gov/Archives/edgar/data/891103/000089110326000130/mtch-20260630.htm)',
+    f'{a_t:.1f}' == '6.6' and '9 Jul 2026' in tn['source'] and 6 < t_draft < 7)
 
 gl = next(r for r in dec if r['entity'].startswith('Google Ireland (location'))
 add('google_location', 'second body paragraph', 'a €403 million fine announced on 21 September 2026, 6.6 years after it opened', '€403 million; 6.6 years',
@@ -330,6 +336,13 @@ sp1, sp2 = yrs('2018-08-13', '2022-11-14'), yrs('2022-11-14', '2026-09-21')
 add('footnote_spans', 'footnote', 'opened after an August 2018 AP story and settled in November 2022, 4.3 years later ... almost four years after the US settlement',
     '4.3 years; almost four years', f'AP story 2018-08-13 to settlement 2022-11-14: {sp1:.3f} years; settlement to DPC decision 2026-09-21: {sp2:.3f} years',
     'AP story published 13 Aug 2018; 40-state settlement announced 14 Nov 2022 (https://www.michigan.gov/ag/news/press-releases/2022/11/14/40-attorneys-general-announce-historic-google-settlement-over-location-tracking-practices); DPC decision 21 Sep 2026', f'{sp1:.1f}' == '4.3' and 3.5 < sp2 < 4)
+
+xg = next(r for r in opn if r['entity'].startswith('X Internet Unlimited Company (Grok AI training'))
+x_months = (D(xg['commencement_date']) - D('2024-08-08')).days / (365.25 / 12)
+add('x_undertaking_to_inquiry', 'table', 'In August 2024, X gave a narrow High Court undertaking ... The DPC opened a formal inquiry eight months later',
+    'August 2024; eight months', f"{x_months:.2f} months (undertaking 2024-08-08 to inquiry commencement {xg['commencement_date']})",
+    'DPC press release 8 Aug 2024 (https://www.dataprotection.ie/en/news-media/press-releases/dpc-welcomes-xs-agreement-suspend-its-processing-personal-data-purpose-training-ai-tool-grok); commencement_date of the X Grok AI-training row in data/dpc_open_inquiries.csv, from the DPC announcement of 11 Apr 2025 (https://www.dataprotection.ie/en/news-media/latest-news/data-protection-commission-announces-commencement-inquiry-x-internet-unlimited-company-xiuc)',
+    round(x_months) == 8)
 
 out = os.path.join(ROOT, 'output', 'post_numbers.csv')
 with open(out, 'w', newline='', encoding='utf-8') as f:

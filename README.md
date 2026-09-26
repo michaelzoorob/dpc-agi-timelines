@@ -105,7 +105,10 @@ since the 2020 to 2023 annual reports. Rechecking the numbers corrected three st
 strong-AGI probability at the 6.2-year median is 59% (0.5945), not 60%; the annual reports mention nine further
 unregistered decisions (the tenth is on the EDPB register only); and with the Google location-data decision
 counted, the statutory inquiries alone reach a Kaplan-Meier median of 6.6 years, so the 6.2-year median is a floor
-because including the three complaint decisions lowers it. No analysis output changed.
+because including the three complaint decisions lowers it. No analysis output changed. A later pass added the
+two remaining unchecked phrases (the hospital inquiry's "more than six years" and the Tinder draft decision
+arriving "more than six years in") to existing rows, and a row for the eight months between X's August 2024
+High Court undertaking and the DPC's April 2025 Grok inquiry.
 
 ## Changes on 25 Sep 2026
 
